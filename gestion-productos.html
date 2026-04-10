@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - Sistema Moteles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/gestion-productos.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+    <!-- Panel lateral -->
+    <aside class="sidebar">
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+                <div class="user-status"></div>
+            </div>
+            <div class="user-name" id="userName">Administrador</div>
+            <div class="user-role">Administrador</div>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dasboard-admin.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Turnos</span>
+            </a>
+            <a href="habitaciones.html" class="nav-item">
+                <i class="fas fa-door-closed"></i>
+                <span>Habitaciones</span>
+            </a>
+            <a href="tarifas.html" class="nav-item">
+                <i class="fas fa-tags"></i>
+                <span>Tarifas</span>
+            </a>
+            <a href="reservaciones.html" class="nav-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>Reservaciones</span>
+            </a>
+            <a href="facturacion.html" class="nav-item">
+                <i class="fas fa-cash-register"></i>
+                <span>Facturación</span>
+            </a>
+            <a href="gestion-productos.html" class="nav-item active">
+                <i class="fas fa-box"></i>
+                <span>Productos</span>
+            </a>
+            <a href="gestion-sedes.html" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Sedes</span>
+            </a>
+            <a href="gestion-usuarios.html" class="nav-item">
+                <i class="fas fa-users-cog"></i>
+                <span>Gestión de Usuarios</span>
+            </a>
+            <a href="gastos-sede.html" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Gastos por Sede</span>
+            </a>
+            <a href="reportes.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reportes</span>
+            </a>
+        </nav>
+        <div class="logout-section">
+            <a href="#" class="logout-btn" onclick="cerrarSesion()">
+                <span>Cerrar Sesión</span>
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+        </div>
+    </aside>
+    
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title">Gestión de Productos</h1>
+            <div class="top-bar-actions">
+                <button class="top-bar-btn" onclick="abrirModalNuevoProducto()">
+                    <i class="fas fa-plus"></i> Nuevo Producto
+                </button>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div class="productos-container">
+                <!-- Filtros y búsqueda -->
+                <div class="productos-header">
+                    <div class="filters-section">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Buscar por código, nombre o proveedor..." onkeyup="filtrarProductos()">
+                        </div>
+                        
+                        <div class="sede-filter">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select id="sedeFilter" onchange="filtrarProductos()">
+                                <option value="">Todas las sedes</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-buttons">
+                            <button id="btnTodos" class="filter-btn active" onclick="filtrarPorEstado('todos')">
+                                <i class="fas fa-list"></i> Todos
+                            </button>
+                            <button id="btnBajoStock" class="filter-btn" onclick="filtrarPorEstado('bajo-stock')">
+                                <i class="fas fa-exclamation-triangle"></i> Baja Cantidad
+                            </button>
+                            <button id="btnDesactivados" class="filter-btn" onclick="filtrarPorEstado('desactivados')">
+                                <i class="fas fa-eye-slash"></i> Ver Desactivados
+                            </button>
+                            <button class="top-bar-btn" onclick="abrirModalImprimirReporte()" style="background: #d32f2f; padding: 10px 20px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-file-pdf"></i> Imprimir Reporte
+                            </button>
+                            <button class="top-bar-btn" onclick="abrirModalImprimirTirilla()" style="background: #7b1fa2; padding: 10px 20px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-receipt"></i> Imprimir Tirilla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tabla de productos -->
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Mínimo</th>
+                                <th>Máximo</th>
+                                <th>Proveedor</th>
+                                <th>Sede</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productosTableBody">
+                            <tr>
+                                <td colspan="9" class="text-center">Cargando productos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal para nuevo/editar producto -->
+    <div class="modal-overlay" id="modalProducto">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-box"></i> Nuevo Producto</h2>
+                <button class="modal-close" onclick="cerrarModalProducto()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formProducto" onsubmit="guardarProducto(event)">
+                    <input type="hidden" id="productoId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="codigo">Código del Producto</label>
+                            <input type="text" id="codigo" required placeholder="Ej: PROD-001">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nombre">Nombre del Producto</label>
+                            <input type="text" id="nombre" required placeholder="Ej: Toallas">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <input type="text" id="precio" required placeholder="0" oninput="formatearPrecio(this)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad Actual</label>
+                            <input type="number" id="cantidad" min="0" required placeholder="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cantidadMinima">Cantidad Mínima</label>
+                            <input type="number" id="cantidadMinima" min="0" required placeholder="0">
+                            <small>Alerta cuando llegue a esta cantidad</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cantidadMaxima">Cantidad Máxima</label>
+                            <input type="number" id="cantidadMaxima" min="0" required placeholder="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="proveedor">Proveedor</label>
+                            <input type="text" id="proveedor" required placeholder="Nombre del proveedor">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sedeProducto">Sede</label>
+                            <select id="sedeProducto">
+                                <option value="TODAS">Todas las sedes</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" onclick="cerrarModalProducto()">Cancelar</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para copiar producto -->
+    <div class="modal-overlay" id="modalCopiarProducto">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2><i class="fas fa-copy"></i> Copiar Producto a Otras Sedes</h2>
+                <button class="modal-close" onclick="cerrarModalCopiar()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formCopiarProducto" onsubmit="copiarProducto(event)">
+                    <input type="hidden" id="productoIdCopiar">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Código del Producto</label>
+                            <input type="text" id="codigoProductoCopiar" readonly style="background: #f5f5f5; font-weight: bold;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Producto a copiar</label>
+                            <input type="text" id="nombreProductoCopiar" readonly style="background: #f5f5f5;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sedesDestino">Sedes destino (puedes seleccionar múltiples)</label>
+                        <div id="sedesDestinoContainer" style="max-height: 200px; overflow-y: auto; border: 2px solid #e0e0e0; border-radius: 10px; padding: 10px;">
+                            <!-- Se llenará dinámicamente con checkboxes -->
+                        </div>
+                        <small>Selecciona una o más sedes donde deseas copiar este producto</small>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" onclick="cerrarModalCopiar()">Cancelar</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-copy"></i> Copiar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para copiar producto desde múltiples sedes -->
+    <div class="modal-overlay" id="modalCopiarMultiple">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2><i class="fas fa-copy"></i> Copiar Producto</h2>
+                <button class="modal-close" onclick="cerrarModalCopiarMultiple()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formCopiarMultiple" onsubmit="copiarProductoMultiple(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Código del Producto</label>
+                            <input type="text" id="codigoProductoCopiarMultiple" readonly style="background: #f5f5f5; font-weight: bold;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Producto</label>
+                            <input type="text" id="nombreProductoCopiarMultiple" readonly style="background: #f5f5f5;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Selecciona la sede de origen</label>
+                        <div id="sedesOrigenContainer" style="max-height: 150px; overflow-y: auto; border: 2px solid #e0e0e0; border-radius: 10px; padding: 10px;">
+                            <!-- Se llenará dinámicamente con checkboxes -->
+                        </div>
+                        <small>Selecciona UNA sede de donde copiar el producto</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Sedes destino (puedes seleccionar múltiples)</label>
+                        <div id="sedesDestinoContainerMultiple" style="max-height: 200px; overflow-y: auto; border: 2px solid #e0e0e0; border-radius: 10px; padding: 10px;">
+                            <!-- Se llenará dinámicamente con checkboxes -->
+                        </div>
+                        <small>Selecciona una o más sedes donde deseas copiar este producto</small>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" onclick="cerrarModalCopiarMultiple()">Cancelar</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-copy"></i> Copiar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para eliminar de múltiples sedes -->
+    <div class="modal-overlay" id="modalEliminarMultiple">
+        <div class="modal-container">
+            <div class="modal-header" style="background: #ffebee;">
+                <h2 style="color: #c62828;"><i class="fas fa-trash"></i> Eliminar Producto</h2>
+                <button class="modal-close" onclick="cerrarModalEliminarMultiple()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 16px; color: #666; margin-bottom: 10px;">
+                        <strong>Código:</strong> <span id="codigoProductoEliminar" style="font-weight: bold; color: #000;"></span>
+                    </div>
+                    <div style="font-size: 18px; font-weight: bold; color: #000;">
+                        <span id="nombreProductoEliminar"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label style="color: #c62828;">Selecciona de qué sedes deseas eliminar este producto</label>
+                    <div id="sedesEliminarContainer" style="max-height: 250px; overflow-y: auto; border: 2px solid #f8d7da; border-radius: 10px; padding: 10px; background: #fff;">
+                        <!-- Se llenará dinámicamente con checkboxes -->
+                    </div>
+                    <small style="color: #c62828;">⚠️ Esta acción no se puede deshacer</small>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="cerrarModalEliminarMultiple()">Cancelar</button>
+                    <button type="button" class="btn-primary" onclick="eliminarProductoMultiple()" style="background: #c62828;">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para desactivar de múltiples sedes -->
+    <div class="modal-overlay" id="modalDesactivarMultiple">
+        <div class="modal-container">
+            <div class="modal-header" style="background: #fff3e0;">
+                <h2 style="color: #e65100;"><i class="fas fa-ban"></i> Desactivar Producto</h2>
+                <button class="modal-close" onclick="cerrarModalDesactivarMultiple()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 16px; color: #666; margin-bottom: 10px;">
+                        <strong>Código:</strong> <span id="codigoProductoDesactivar" style="font-weight: bold; color: #000;"></span>
+                    </div>
+                    <div style="font-size: 18px; font-weight: bold; color: #000;">
+                        <span id="nombreProductoDesactivar"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label style="color: #e65100;">Selecciona de qué sedes deseas desactivar este producto</label>
+                    <div id="sedesDesactivarContainer" style="max-height: 250px; overflow-y: auto; border: 2px solid #fff3e0; border-radius: 10px; padding: 10px; background: #fff;">
+                        <!-- Se llenará dinámicamente con checkboxes -->
+                    </div>
+                    <small style="color: #666;">Los productos desactivados no se mostrarán en la lista principal</small>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="cerrarModalDesactivarMultiple()">Cancelar</button>
+                    <button type="button" class="btn-primary" onclick="desactivarProductoMultiple()" style="background: #e65100;">
+                        <i class="fas fa-ban"></i> Desactivar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para seleccionar tipo de reporte PDF -->
+    <div class="modal-overlay" id="modalImprimirReporte">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-pdf"></i> Imprimir Reporte PDF</h2>
+                <button class="modal-close" onclick="cerrarModalImprimirReporte()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">Selecciona qué productos deseas incluir en el reporte:</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <button class="btn-primary" onclick="imprimirReportePDF('todos')" style="padding: 15px; font-size: 16px;">
+                        <i class="fas fa-list"></i> Todos los Productos
+                    </button>
+                    <button class="btn-primary" onclick="imprimirReportePDF('bajo-stock')" style="padding: 15px; font-size: 16px; background: #f57c00;">
+                        <i class="fas fa-exclamation-triangle"></i> Solo Productos con Baja Cantidad
+                    </button>
+                </div>
+                <div class="modal-footer" style="margin-top: 20px;">
+                    <button type="button" class="btn-secondary" onclick="cerrarModalImprimirReporte()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para seleccionar tipo de tirilla -->
+    <div class="modal-overlay" id="modalImprimirTirilla">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-receipt"></i> Imprimir Tirilla POS</h2>
+                <button class="modal-close" onclick="cerrarModalImprimirTirilla()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">Selecciona qué productos deseas incluir en la tirilla:</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <button class="btn-primary" onclick="imprimirTirilla('todos')" style="padding: 15px; font-size: 16px;">
+                        <i class="fas fa-list"></i> Todos los Productos
+                    </button>
+                    <button class="btn-primary" onclick="imprimirTirilla('bajo-stock')" style="padding: 15px; font-size: 16px; background: #f57c00;">
+                        <i class="fas fa-exclamation-triangle"></i> Solo Productos con Baja Cantidad
+                    </button>
+                </div>
+                <div class="modal-footer" style="margin-top: 20px;">
+                    <button type="button" class="btn-secondary" onclick="cerrarModalImprimirTirilla()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/cache-zoom.js"></script>
+    <script src="js/permisos.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/gestion-productos.js" defer></script>
+<script src="js/sidebar-mobile.js"></script>
+</body>
+</html>

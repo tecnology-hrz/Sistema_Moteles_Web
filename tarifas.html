@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifas - Sistema Moteles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/tarifas.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+    <!-- Panel lateral -->
+    <aside class="sidebar">
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+                <div class="user-status"></div>
+            </div>
+            <div class="user-name" id="userName">Administrador</div>
+            <div class="user-role">Administrador</div>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dasboard-admin.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Turnos</span>
+            </a>
+            <a href="habitaciones.html" class="nav-item">
+                <i class="fas fa-door-closed"></i>
+                <span>Habitaciones</span>
+            </a>
+            <a href="tarifas.html" class="nav-item active">
+                <i class="fas fa-tags"></i>
+                <span>Tarifas</span>
+            </a>
+            <a href="reservaciones.html" class="nav-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>Reservaciones</span>
+            </a>
+            <a href="facturacion.html" class="nav-item">
+                <i class="fas fa-cash-register"></i>
+                <span>Facturación</span>
+            </a>
+            <a href="gestion-productos.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Productos</span>
+            </a>
+            <a href="gestion-sedes.html" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Sedes</span>
+            </a>
+            <a href="gestion-usuarios.html" class="nav-item">
+                <i class="fas fa-users-cog"></i>
+                <span>Gestión de Usuarios</span>
+            </a>
+            <a href="gastos-sede.html" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Gastos por Sede</span>
+            </a>
+            <a href="reportes.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reportes</span>
+            </a>
+        </nav>
+        <div class="logout-section">
+            <a href="#" class="logout-btn" onclick="cerrarSesion()">
+                <span>Cerrar Sesión</span>
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </aside>
+    
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title">Gestión de Tarifas</h1>
+            <div class="top-bar-actions">
+                <button class="top-bar-btn" onclick="abrirModalNuevaTarifa()" data-permiso="crear_tarifas">
+                    <i class="fas fa-plus"></i> Nueva Tarifa
+                </button>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div class="tarifas-container">
+                <div class="tarifas-header">
+                    <div class="filters-section">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Buscar por nombre de tarifa..." onkeyup="filtrarTarifas()">
+                        </div>
+                        
+                        <div class="sede-filter">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select id="sedeFilter" onchange="filtrarTarifas()">
+                                <option value="">Todas las sedes</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-buttons">
+                            <button id="btnTodas" class="filter-btn active" onclick="filtrarPorEstado('todas')">
+                                <i class="fas fa-list"></i> Todas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:20%">Nombre</th>
+                                <th style="width:8%">Horas</th>
+                                <th style="width:8%">Personas</th>
+                                <th style="width:13%">Precio</th>
+                                <th style="width:13%">Hora Extra</th>
+                                <th style="width:16%">Sede</th>
+                                <th style="width:22%">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tarifasTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center">Cargando tarifas...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal nueva/editar tarifa -->
+    <div class="modal-overlay" id="modalTarifa">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-tags"></i> Nueva Tarifa</h2>
+                <button class="modal-close" onclick="cerrarModalTarifa()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formTarifa" onsubmit="guardarTarifa(event)">
+                    <input type="hidden" id="tarifaId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombreTarifa">Nombre de la Tarifa</label>
+                            <input type="text" id="nombreTarifa" required placeholder="Ej: Estándar 4h, Noche, Día completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="sedeTarifa">Sede</label>
+                            <select id="sedeTarifa">
+                                <option value="TODAS">Todas las sedes</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="horasTarifa">Horas Incluidas</label>
+                            <input type="number" id="horasTarifa" min="1" required placeholder="Ej: 4" value="4">
+                        </div>
+                        <div class="form-group">
+                            <label for="capacidadTarifa">Capacidad (personas)</label>
+                            <input type="number" id="capacidadTarifa" min="1" required placeholder="Ej: 2" value="2">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="precioTarifa">Precio</label>
+                            <input type="text" id="precioTarifa" required placeholder="0" oninput="formatearPrecioTarifa(this)">
+                        </div>
+                        <div class="form-group">
+                            <label for="precioHoraExtraTarifa">Precio Hora Extra</label>
+                            <input type="text" id="precioHoraExtraTarifa" placeholder="0" oninput="formatearPrecioTarifa(this)">
+                            <small>Precio por cada hora adicional después de las horas incluidas</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcionTarifa">Descripción (Opcional)</label>
+                        <textarea id="descripcionTarifa" rows="2" placeholder="Descripción de la tarifa..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="cerrarModalTarifa()">Cancelar</button>
+                <button type="submit" form="formTarifa" class="btn-primary" id="btnSubmitTarifa">
+                    <i class="fas fa-plus"></i> Crear Tarifa
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/cache-zoom.js"></script>
+    <script src="js/permisos.js"></script>
+    <script src="js/tarifas.js"></script>
+<script src="js/sidebar-mobile.js"></script>
+</body>
+</html>

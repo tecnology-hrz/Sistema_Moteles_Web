@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Sede - Sistema de Moteles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/configuracion-sede.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-back" onclick="volverLogin()">
+                <i class="fas fa-arrow-left"></i> Volver al Login
+            </button>
+            <h1><i class="fas fa-cog"></i> Configuración del Sistema</h1>
+            <p>Selecciona la sede activa para este sistema</p>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div class="config-section">
+            <div class="section-header">
+                <i class="fas fa-building"></i>
+                <h2>Sede Actual</h2>
+            </div>
+            
+            <div id="sedeActualInfo" class="sede-actual-card">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Cargando información...
+                </div>
+            </div>
+        </div>
+
+        <div class="config-section">
+            <div class="section-header">
+                <i class="fas fa-list"></i>
+                <h2>Sedes Disponibles</h2>
+            </div>
+            
+            <div id="sedesLista" class="sedes-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Cargando sedes...
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Importante:</strong> Al seleccionar una sede, todos los usuarios que se registren en este sistema pertenecerán automáticamente a la sede seleccionada. Los usuarios existentes no se verán afectados.
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div id="modalContainer" class="modal-container">
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <p id="modalMessage" class="modal-message"></p>
+            <button id="modalButton" class="modal-button"></button>
+        </div>
+    </div>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/cache-zoom.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/configuracion-sede.js" defer></script>
+<script src="js/sidebar-mobile.js"></script>
+</body>
+</html>

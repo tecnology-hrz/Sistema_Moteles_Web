@@ -1,0 +1,958 @@
+/* Contenedor de usuarios */
+.usuarios-container {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.usuarios-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Contenedor de búsqueda y filtro de sede */
+.search-and-sede-filters {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    align-items: center;
+}
+
+/* Buscador */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.search-box i {
+    color: #999999;
+    margin-right: 10px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    color: #000000;
+}
+
+/* Filtros */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background: #f5f5f5;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-btn:hover {
+    background: #e0e0e0;
+}
+
+.filter-btn.active {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* Tabla de usuarios */
+.usuarios-table {
+    overflow-x: auto;
+}
+
+.usuarios-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #cccccc;
+}
+
+.usuarios-table thead {
+    background: #000000;
+}
+
+.usuarios-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid #444444;
+}
+
+.usuarios-table td {
+    padding: 12px 15px;
+    border: 2px solid #cccccc;
+    font-size: 14px;
+    color: #333333;
+}
+
+.usuarios-table tbody tr {
+    transition: none;
+}
+
+.usuarios-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.usuarios-table tbody tr:last-child td {
+    border-bottom: 2px solid #cccccc;
+}
+
+/* Fila de usuario inactivo */
+.usuarios-table tbody tr.usuario-inactivo {
+    background: #f8d7da !important;
+}
+
+.usuarios-table tbody tr.usuario-inactivo:hover {
+    background: #f8d7da !important;
+}
+
+.usuarios-table tbody tr.usuario-inactivo td {
+    color: #721c24 !important;
+}
+
+.usuarios-table tbody tr.usuario-inactivo .usuario-nombre {
+    color: #721c24 !important;
+}
+
+/* Usuario info */
+.usuario-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.usuario-avatar {
+    width: 40px;
+    height: 40px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.usuario-nombre {
+    font-weight: 600;
+    color: #000000;
+}
+
+/* Badge de rol */
+.rol-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.rol-badge.admin {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.rol-badge.empleado {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+/* Estado */
+.estado-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.estado-badge.activo {
+    background: #d4edda;
+    color: #155724;
+}
+
+.estado-badge.inactivo {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.estado-badge i {
+    font-size: 8px;
+}
+
+/* Botones de acción */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.action-btn.edit {
+    background: #1976d2;
+    color: #ffffff;
+}
+
+.action-btn.delete {
+    background: #c62828;
+    color: #ffffff;
+}
+
+.action-btn.toggle {
+    background: #e65100;
+    color: #ffffff;
+}
+
+.action-btn i {
+    color: #ffffff;
+}
+
+/* Loading y empty states */
+.loading, .empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999999;
+}
+
+.loading i, .empty-state i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .usuarios-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        max-width: 100%;
+    }
+    
+    .filter-buttons {
+        justify-content: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+
+
+/* Campo de contraseña */
+.password-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.password-hidden {
+    font-family: monospace;
+    letter-spacing: 2px;
+}
+
+.toggle-password-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666666;
+    font-size: 14px;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.toggle-password-btn:hover {
+    color: #000000;
+}
+
+/* Modal de edición */
+.modal-overlay-edit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content-edit {
+    background: #ffffff;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header-edit {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f8f8;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-header-edit h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.modal-header-edit h2 i {
+    font-size: 20px;
+}
+
+.modal-close-edit {
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: #999999;
+    cursor: pointer;
+    transition: all 0.3s;
+    line-height: 1;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-close-edit:hover {
+    color: #000000;
+    background: #e0e0e0;
+}
+
+#editForm,
+#newUserForm {
+    padding: 30px;
+}
+
+.form-group-edit {
+    margin-bottom: 20px;
+}
+
+.form-group-edit label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333333;
+    font-size: 14px;
+}
+
+.form-group-edit input,
+.form-group-edit select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.form-group-edit select {
+    padding-right: 35px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+.form-group-edit input[type="text"],
+.form-group-edit input[type="password"] {
+    background-image: none;
+}
+
+.form-group-edit input:focus,
+.form-group-edit select:focus {
+    outline: none;
+    border-color: #000000;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group-edit small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #999999;
+}
+
+.modal-actions-edit {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn-cancel-edit,
+.btn-save-edit {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.btn-cancel-edit {
+    background: #f5f5f5;
+    color: #666666;
+    border: 2px solid #e0e0e0;
+}
+
+.btn-cancel-edit:hover {
+    background: #e0e0e0;
+    border-color: #d0d0d0;
+}
+
+.btn-save-edit {
+    background: #000000;
+    color: #ffffff;
+}
+
+.btn-save-edit:hover {
+    background: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-save-edit:active {
+    transform: translateY(0);
+}
+
+
+/* Botón de copiar contraseña */
+.copy-password-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666666;
+    font-size: 14px;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.copy-password-btn:hover {
+    color: #4caf50;
+}
+
+/* Ajustes para el input de contraseña en el modal */
+.form-group-edit input[type="password"],
+.form-group-edit input[type="text"] {
+    padding-right: 80px;
+}
+
+/* Ocultar el icono nativo de mostrar/ocultar contraseña del navegador */
+.form-group-edit input[type="password"]::-ms-reveal,
+.form-group-edit input[type="password"]::-ms-clear {
+    display: none;
+}
+
+.form-group-edit input[type="password"]::-webkit-credentials-auto-fill-button,
+.form-group-edit input[type="password"]::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+
+/* Para Edge y otros navegadores basados en Chromium */
+.form-group-edit input[type="password"]::-webkit-textfield-decoration-container {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.form-group-edit input[type="password"]::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    height: 0;
+    width: 0;
+    margin: 0;
+}
+
+
+/* Modal de confirmación */
+.modal-overlay-confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content-confirm {
+    background: #ffffff;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s;
+    text-align: center;
+}
+
+.modal-icon-confirm {
+    width: 60px;
+    height: 60px;
+    background: #fff3cd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+    color: #856404;
+}
+
+.modal-title-confirm {
+    font-size: 22px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.modal-message-confirm {
+    font-size: 15px;
+    color: #666666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-buttons-confirm {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-cancel-confirm,
+.btn-confirm {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel-confirm {
+    background: #f5f5f5;
+    color: #666666;
+}
+
+.btn-cancel-confirm:hover {
+    background: #e0e0e0;
+}
+
+.btn-confirm {
+    background: #000000;
+    color: #ffffff;
+}
+
+.btn-confirm:hover {
+    background: #333333;
+    transform: translateY(-2px);
+}
+
+
+/* Información de sede */
+.sede-info {
+    display: flex;
+    align-items: center;
+    color: #666666;
+    font-size: 14px;
+}
+
+/* Filtro de sedes */
+.sede-filter {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    gap: 10px;
+    min-width: 220px;
+    position: relative;
+    cursor: pointer;
+}
+
+.sede-filter i {
+    color: #999999;
+    font-size: 14px;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+.sede-filter select {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #000000;
+    cursor: pointer;
+    flex: 1;
+    padding: 0 20px 0 5px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+    padding-right: 35px;
+}
+
+.sede-filter select:hover {
+    color: #000000;
+}
+
+.sede-filter select option {
+    padding: 10px;
+    background: #ffffff;
+    color: #000000;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ESTILOS DEL MODAL DE PERMISOS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Modal de permisos profesional - más ancho */
+.modal-permisos-profesional {
+    max-width: 900px !important;
+    width: 95% !important;
+    max-height: 90vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+/* Header fijo del modal de permisos */
+.modal-header-fixed {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8f8f8;
+    border-radius: 20px 20px 0 0;
+    flex-shrink: 0;
+}
+
+/* Cuerpo del modal con scroll */
+.modal-body-permisos {
+    flex: 1;
+    overflow-y: auto;
+    padding: 25px 30px;
+    background: #ffffff;
+}
+
+/* Footer fijo del modal de permisos */
+.modal-footer-fixed {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    border-radius: 0 0 20px 20px;
+    padding: 20px 30px;
+    margin-top: 0 !important;
+    flex-shrink: 0;
+}
+
+.permisos-categoria {
+    margin-bottom: 16px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.permisos-categoria-titulo {
+    background: #f5f5f5;
+    padding: 12px 18px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.permisos-lista {
+    padding: 12px 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 8px 20px;
+}
+
+.permiso-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #444;
+    transition: background 0.15s;
+}
+
+.permiso-item:hover {
+    background: #f0f7ff;
+}
+
+.permiso-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #1976d2;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.permiso-item input[type="checkbox"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.permiso-item span {
+    line-height: 1.4;
+}
+
+/* Columna de permisos en tabla de usuarios */
+.permisos-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.permisos-badge.completos {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.permisos-badge.personalizados {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+/* Scrollbar personalizado para el modal de permisos */
+.modal-body-permisos::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body-permisos::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-body-permisos::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 10px;
+}
+
+.modal-body-permisos::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+/* Responsive para el modal de permisos */
+@media (max-width: 768px) {
+    .modal-permisos-profesional {
+        max-width: 95% !important;
+        width: 95% !important;
+    }
+    
+    .permisos-lista {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-body-permisos {
+        padding: 20px 15px;
+    }
+    
+    .modal-footer-fixed {
+        padding: 15px 15px;
+    }
+}
+
+
+/* Checkboxes de sedes múltiples */
+.sede-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.15s;
+}
+.sede-checkbox-label:hover {
+    background: rgba(0,0,0,0.05);
+}
+.sede-checkbox-label input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    accent-color: #1565c0;
+    cursor: pointer;
+}
+.sede-checkbox-label input[type="checkbox"]:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+    .top-bar { padding: 10px 12px 10px 62px; }
+
+    .usuarios-header {
+        padding: 14px 14px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-and-sede-filters {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-box {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .sede-filter {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .filter-buttons {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+    }
+    .filter-buttons::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+        font-size: 12px;
+        padding: 7px 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .usuarios-table { overflow-x: auto; }
+
+    .usuarios-table table {
+        font-size: 12px;
+        min-width: 500px;
+    }
+
+    .usuarios-table th,
+    .usuarios-table td {
+        padding: 8px 8px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

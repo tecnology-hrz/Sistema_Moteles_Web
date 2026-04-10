@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador - Sistema Moteles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+    <!-- Panel lateral -->
+    <aside class="sidebar">
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+                <div class="user-status"></div>
+            </div>
+            <div class="user-name" id="userName">Administrador</div>
+            <div class="user-role">Administrador</div>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dasboard-admin.html" class="nav-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>Turnos</span>
+            </a>
+            <a href="habitaciones.html" class="nav-item">
+                <i class="fas fa-door-closed"></i>
+                <span>Habitaciones</span>
+            </a>
+            <a href="tarifas.html" class="nav-item">
+                <i class="fas fa-tags"></i>
+                <span>Tarifas</span>
+            </a>
+            <a href="reservaciones.html" class="nav-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>Reservaciones</span>
+            </a>
+            <a href="facturacion.html" class="nav-item">
+                <i class="fas fa-cash-register"></i>
+                <span>Facturación</span>
+            </a>
+            <a href="gestion-productos.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Productos</span>
+            </a>
+            <a href="gestion-sedes.html" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Sedes</span>
+            </a>
+            <a href="gestion-usuarios.html" class="nav-item">
+                <i class="fas fa-users-cog"></i>
+                <span>Gestión de Usuarios</span>
+            </a>
+            <a href="gastos-sede.html" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Gastos por Sede</span>
+            </a>
+            <a href="reportes.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reportes</span>
+            </a>
+        </nav>
+        
+        <div class="logout-section">
+            <a href="#" class="logout-btn" onclick="cerrarSesion()">
+                <span>Cerrar Sesión</span>
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </aside>
+    
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title" id="pageTitle">Turnos</h1>
+            <div class="top-bar-actions">
+                <select id="topBarSedeSelector" class="top-bar-sede-select" onchange="cambiarSedeDashboard(this.value)">
+                    <option value="">Todas las sedes</option>
+                </select>
+                <button class="top-bar-btn" onclick="abrirConfigTurnos()">
+                    <i class="fas fa-cog"></i> Configuración de Turno
+                </button>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div class="dashboard-main-grid">
+                <!-- Columna Izquierda -->
+                <div class="dashboard-left">
+                    <div class="dashboard-grid">
+                        <!-- Turno Actual -->
+                        <div class="info-card-full">
+                            <div class="card-icon">
+                                <i class="fas fa-business-time"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-label">Turno Actual</div>
+                                <div class="card-value-small" id="turnoActual">Sin turno activo</div>
+                            </div>
+                        </div>
+
+                        <!-- Dinero Base -->
+                        <div class="info-card-wide">
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-label">Dinero Base</div>
+                                <div class="card-value" id="dineroBase">$0</div>
+                            </div>
+                        </div>
+
+                        <!-- Dinero Facturado -->
+                        <div class="info-card-wide">
+                            <div class="card-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-label">Dinero Facturado</div>
+                                <div class="card-value" id="dineroFacturado">$0</div>
+                            </div>
+                        </div>
+
+                        <!-- Total en Caja -->
+                        <div class="info-card-total">
+                            <div class="card-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-label">Total en Caja</div>
+                                <div class="card-value-large" id="totalCaja">$0</div>
+                            </div>
+                        </div>
+
+                        <!-- Botón Registrar Turno -->
+                        <div class="info-card-button-full">
+                            <button class="btn-registrar-turno" id="btnIniciarTurno" onclick="registrarInicioTurno()">
+                                <i class="fas fa-play-circle"></i>
+                                Registrar Inicio de Turno
+                            </button>
+                        </div>
+
+                        <!-- Botón Registrar Salida -->
+                        <div class="info-card-button-full">
+                            <button class="btn-registrar-salida" id="btnSalidaTurno" onclick="registrarSalidaTurno()" disabled>
+                                <i class="fas fa-stop-circle"></i>
+                                Registrar Salida de Turno
+                            </button>
+                        </div>
+
+                        <!-- Botón Imprimir PDF -->
+                        <div class="info-card-button-wide">
+                            <button class="btn-imprimir-pdf" id="btnImprimirPDF" onclick="imprimirPDFTurno()" disabled>
+                                <i class="fas fa-file-pdf"></i>
+                                PDF Cuadre de Turno
+                            </button>
+                        </div>
+
+                        <!-- Botón Tirilla POS -->
+                        <div class="info-card-button-wide">
+                            <button class="btn-tirilla-pos" id="btnTirillaPOS" onclick="imprimirTirillaPOS()" disabled>
+                                <i class="fas fa-receipt"></i>
+                                Tirilla Cuadre de Turno
+                            </button>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha - Registro de Turnos -->
+                <div class="dashboard-right">
+                    <div class="registro-turnos-card">
+                        <div class="registro-header">
+                            <i class="fas fa-history"></i>
+                            <h3>Registro de Turnos</h3>
+                        </div>
+                        <div class="registro-table-container">
+                            <table class="registro-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Fecha de Ingreso</th>
+                                        <th>Fecha de Salida</th>
+                                        <th>Dinero Base</th>
+                                        <th>Total en Caja</th>
+                                        <th>Total Facturado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="registroTurnosBody">
+                                    <tr>
+                                        <td colspan="4" class="no-data">No hay registros de turnos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal Configuración de Turno -->
+    <div class="modal-overlay-confirm" id="modalConfigTurnos" style="display:none;">
+        <div class="modal-content-confirm" style="max-width:480px;width:95%;">
+            <div class="modal-icon-confirm">
+                <i class="fas fa-cog"></i>
+            </div>
+            <h2 class="modal-title-confirm">Configuración de Turno</h2>
+            <div class="config-turno-form">
+                <div class="config-field">
+                    <label>Sede</label>
+                    <select id="configSedeSelector" onchange="cargarConfigTurnoPorSede(this.value)">
+                        <option value="">Cargando sedes...</option>
+                    </select>
+                    <small id="configSedeInfo" style="color:#555;margin-top:2px;"></small>
+                </div>
+                <div class="config-field">
+                    <label>Dinero Base del Turno</label>
+                    <div class="input-prefix-wrap">
+                        <span class="input-prefix">$</span>
+                        <input type="text" id="configDineroBase" inputmode="numeric" placeholder="0" oninput="formatearMiles(this)">
+                    </div>
+                </div>
+                <div class="config-field">
+                    <label>Hora de inicio del turno</label>
+                    <input type="time" id="configHoraInicio" value="07:00">
+                </div>
+                <div class="config-field">
+                    <label>Hora de fin del turno</label>
+                    <input type="time" id="configHoraFin" value="07:00">
+                    <small>El turno termina al día siguiente si la hora de fin ≤ hora de inicio</small>
+                </div>
+            </div>
+
+            <div class="modal-buttons-confirm">
+                <button class="btn-cancel-confirm" onclick="cerrarConfigTurnos()">Cancelar</button>
+                <button class="btn-confirm" onclick="guardarConfigTurnos()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/cache-zoom.js"></script>
+    <script src="js/permisos.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/dashboard.js" defer></script>
+<script src="js/sidebar-mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación - Sistema Moteles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/facturacion.css?v=10">
+    <link rel="stylesheet" href="css/modal.css?v=7">
+</head>
+<body>
+    <!-- Panel lateral -->
+    <aside class="sidebar">
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+                <div class="user-status"></div>
+            </div>
+            <div class="user-name" id="userName">Administrador</div>
+            <div class="user-role">Administrador</div>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dasboard-admin.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Turnos</span>
+            </a>
+            <a href="habitaciones.html" class="nav-item">
+                <i class="fas fa-door-closed"></i>
+                <span>Habitaciones</span>
+            </a>
+            <a href="tarifas.html" class="nav-item">
+                <i class="fas fa-tags"></i>
+                <span>Tarifas</span>
+            </a>
+            <a href="reservaciones.html" class="nav-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>Reservaciones</span>
+            </a>
+            <a href="facturacion.html" class="nav-item active">
+                <i class="fas fa-cash-register"></i>
+                <span>Facturación</span>
+            </a>
+            <a href="gestion-productos.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Productos</span>
+            </a>
+            <a href="gestion-sedes.html" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Sedes</span>
+            </a>
+            <a href="gestion-usuarios.html" class="nav-item">
+                <i class="fas fa-users-cog"></i>
+                <span>Gestión de Usuarios</span>
+            </a>
+            <a href="gastos-sede.html" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Gastos por Sede</span>
+            </a>
+            <a href="reportes.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reportes</span>
+            </a>
+        </nav>
+        <div class="logout-section">
+            <a href="#" class="logout-btn" onclick="cerrarSesion()">
+                <span>Cerrar Sesión</span>
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+        </div>
+    </aside>
+    
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title">Facturación</h1>
+        </div>
+        
+        <div class="content-area">
+            <div class="facturas-container">
+                <div class="facturas-header">
+                    <div class="filters-section filters-section--facturacion-vista">
+                        <div class="filter-tabs facturacion-filter-tabs" role="tablist">
+                            <button type="button" class="filter-tab active" id="tabPorFacturar" role="tab" aria-selected="true"
+                                onclick="cambiarVistaFacturacion('por_facturar')">
+                                <i class="fas fa-file-invoice-dollar"></i> Por facturar
+                            </button>
+                            <button type="button" class="filter-tab" id="tabHistorialFacturado" role="tab" aria-selected="false"
+                                onclick="cambiarVistaFacturacion('historial')">
+                                <i class="fas fa-check-double"></i> Historial de facturación
+                            </button>
+                        </div>
+                        <div class="facturacion-sede-en-fila">
+                            <div class="sede-filter">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <select id="sedeFilter" onchange="alCambiarSedeFacturacion()" aria-label="Sede">
+                                    <!-- Las sedes se cargan dinámicamente -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista: pendientes de cobro -->
+                <div id="panelPorFacturar" class="facturacion-panel">
+                    <div class="table-container" id="facturasTable">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Nombre</th>
+                                    <th>Vehículo</th>
+                                    <th>Entrada</th>
+                                    <th>Salida Estimada</th>
+                                    <th>Tiempo</th>
+                                    <th>Tiempo Extra</th>
+                                    <th>Total</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="facturasTableBody">
+                                <tr>
+                                    <td colspan="9" class="text-center">Cargando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vista: ya cobrado (resumen / reportes) -->
+                <div id="panelHistorialFacturado" class="facturacion-panel facturacion-panel--historial" hidden>
+                    <div class="historial-facturacion-filtros">
+                        <div class="historial-facturacion-filtros-izq">
+                            <div class="historial-facturacion-campo">
+                                <label for="historialFechaDesde">Desde</label>
+                                <input type="date" id="historialFechaDesde" onchange="alCambiarFechasHistorial()">
+                            </div>
+                            <div class="historial-facturacion-campo">
+                                <label for="historialFechaHasta">Hasta</label>
+                                <input type="date" id="historialFechaHasta" onchange="alCambiarFechasHistorial()">
+                            </div>
+                            <div class="historial-facturacion-campo">
+                                <label for="historialSelectorMes">Por mes</label>
+                                <select id="historialSelectorMes" onchange="void aplicarMesSeleccionadoYConsultar()">
+                                    <option value="">Seleccionar mes...</option>
+                                </select>
+                            </div>
+                            <div class="historial-facturacion-acciones-rapidas">
+                                <button type="button" class="historial-btn-rango" onclick="void aplicarRangoYConsultarHistorial('hoy')">Hoy</button>
+                                <button type="button" class="historial-btn-rango" onclick="void aplicarRangoYConsultarHistorial('7d')">Últimos 7 días</button>
+                                <button type="button" class="historial-btn-rango" onclick="void aplicarRangoYConsultarHistorial('mes')">Este mes</button>
+                                <button type="button" class="historial-btn-rango" onclick="void aplicarRangoYConsultarHistorial('todo')">Todo</button>
+                            </div>
+                        </div>
+                        <div class="historial-facturacion-filtros-reportes">
+                            <button type="button" class="btn-reporte-pdf-historial" onclick="imprimirHistorialFacturacionPDF()">
+                                <i class="fas fa-file-pdf"></i> Imprimir reporte PDF
+                            </button>
+                            <button type="button" class="btn-reporte-tirilla-historial" onclick="imprimirHistorialFacturacionTirilla()">
+                                <i class="fas fa-receipt"></i> Imprimir reporte POS
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container historial-facturacion-tabla-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th class="historial-col-codfac">N° factura</th>
+                                    <th class="historial-col-fecha">Fecha</th>
+                                    <th class="historial-col-hora">Hora</th>
+                                    <th class="historial-col-lugar">Sede</th>
+                                    <th class="historial-col-num">Núm.</th>
+                                    <th>Nombre</th>
+                                    <th>Vehículo</th>
+                                    <th>Total</th>
+                                    <th>Pago</th>
+                                    <th>Facturó</th>
+                                    <th class="historial-col-acciones">Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historialFacturacionTableBody">
+                                <tr>
+                                    <td colspan="11" class="text-center">Cargando historial…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal de facturación -->
+    <div class="modal-overlay" id="modalFacturacion">
+        <div class="modal-container modal-facturacion-amplio" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Facturación</h2>
+                <button class="modal-close" onclick="cerrarModalFacturacion()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="facturaDetalles"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="cerrarModalFacturacion()">Cancelar</button>
+                <button type="button" class="btn-primary" onclick="confirmarCheckout()">
+                    <i class="fas fa-check"></i> Confirmar Pago
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/cache-zoom.js"></script>
+    <script src="js/permisos.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/consumos-ocupacion.js?v=8" defer></script>
+    <script src="js/facturacion.js?v=29" defer></script>
+<script src="js/sidebar-mobile.js"></script>
+</body>
+</html>

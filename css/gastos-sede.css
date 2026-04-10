@@ -1,0 +1,673 @@
+/* ===== LAYOUT PRINCIPAL ===== */
+.gastos-layout {
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    gap: 20px;
+    height: 100%;
+    align-items: start;
+}
+
+/* ===== COLUMNA LISTA ===== */
+.gastos-lista-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ===== RESUMEN CARDS ===== */
+.resumen-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.resumen-card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.resumen-card-dark {
+    background: #000000;
+    color: #ffffff;
+}
+
+.resumen-icon {
+    width: 44px;
+    height: 44px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #000000;
+    flex-shrink: 0;
+}
+
+.resumen-card-dark .resumen-icon {
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
+}
+
+.resumen-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #888888;
+    margin-bottom: 4px;
+}
+
+.resumen-card-dark .resumen-label {
+    color: rgba(255,255,255,0.65);
+}
+
+.resumen-valor {
+    font-size: 22px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.resumen-card-dark .resumen-valor {
+    color: #ffffff;
+}
+
+/* ===== FILTROS ===== */
+.gastos-filtros {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.filtro-grupo {
+    display: flex;
+    gap: 8px;
+}
+
+.filtro-btn {
+    padding: 8px 18px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filtro-btn:hover {
+    background: #f0f0f0;
+}
+
+.filtro-btn.active {
+    background: #000000;
+    color: #ffffff;
+}
+
+.search-box-gastos {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    gap: 8px;
+    min-width: 220px;
+}
+
+.search-box-gastos i {
+    color: #999999;
+    font-size: 13px;
+}
+
+.search-box-gastos input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    width: 100%;
+    color: #000000;
+}
+
+.search-box-gastos input::placeholder {
+    color: #aaaaaa;
+}
+
+/* ===== TABLA DE GASTOS ===== */
+.gastos-tabla-container {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 2px solid #000000;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.gastos-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.gastos-tabla thead {
+    background: #000000;
+    position: sticky;
+    top: 0;
+}
+
+.gastos-tabla th {
+    padding: 13px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    border: 1.5px solid #444444;
+}
+
+.gastos-tabla td {
+    padding: 14px;
+    font-size: 13px;
+    color: #333333;
+    border: 1.5px solid #cccccc;
+    vertical-align: middle;
+}
+
+.gastos-tabla tbody tr:hover {
+    background: #f5f5f5;
+}
+
+.gastos-tabla td.no-data {
+    text-align: center;
+    padding: 40px;
+    color: #aaaaaa;
+    font-size: 14px;
+    border: 1.5px solid #cccccc;
+}
+
+/* Badges tipo gasto */
+.badge-tipo {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-mensual  { background: #e8f5e9; color: #2e7d32; }
+.badge-semanal  { background: #e3f2fd; color: #1565c0; }
+.badge-unico    { background: #f3e5f5; color: #6a1b9a; }
+
+/* Días restantes */
+.dias-restantes {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dias-num {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.dias-label {
+    font-size: 10px;
+    color: #555555;
+    text-transform: uppercase;
+}
+
+.dias-urgente  { color: #dc3545; }
+.dias-proximo  { color: #e67e22; }
+.dias-normal   { color: #28a745; }
+.dias-vencido  { color: #999999; }
+
+/* Botones acción tabla */
+.btn-accion {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin: 0 2px;
+}
+
+.btn-accion-edit   { background: #f0f0f0; color: #000000; }
+.btn-accion-edit:hover { background: #000000; color: #ffffff; }
+.btn-accion-del    { background: #fdecea; color: #dc3545; }
+.btn-accion-del:hover  { background: #dc3545; color: #ffffff; }
+
+/* ===== COLUMNA CALENDARIO ===== */
+.gastos-calendario-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+}
+
+/* ===== CALENDARIO ===== */
+.calendario-card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.calendario-header {
+    background: #000000;
+    color: #ffffff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cal-titulo {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.cal-nav-btn {
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.cal-nav-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.calendario-dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.calendario-dias-semana span {
+    text-align: center;
+    padding: 8px 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #666666;
+    text-transform: uppercase;
+}
+
+.calendario-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 8px;
+    gap: 3px;
+}
+
+.cal-dia {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+    cursor: default;
+    position: relative;
+    transition: background 0.15s;
+    min-height: 36px;
+}
+
+.cal-dia.vacio {
+    background: transparent;
+    cursor: default;
+}
+
+.cal-dia.hoy {
+    background: #000000;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.cal-dia.tiene-gasto {
+    cursor: pointer;
+    font-weight: 700;
+    border: 2.5px solid #000000;
+}
+
+.cal-dia.tiene-gasto:hover { background: #f0f0f0; }
+
+.cal-dia.hoy.tiene-gasto { border: 2.5px solid #ffffff; }
+.cal-dia.hoy.tiene-gasto:hover { background: #333333; }
+
+/* Pasado → verde */
+.cal-dia.gasto-pasado  { border-color: #28a745; color: #28a745; }
+.cal-dia.gasto-pasado:hover { background: #e8f5e9; }
+
+/* Urgente ≤3 días → rojo */
+.cal-dia.gasto-urgente { border-color: #dc3545; color: #dc3545; }
+.cal-dia.gasto-urgente:hover { background: #fdecea; }
+
+/* Próximo ≤7 días → naranja */
+.cal-dia.gasto-proximo { border-color: #e67e22; color: #856404; }
+.cal-dia.gasto-proximo:hover { background: #fff3cd; }
+
+/* Normal >7 días → negro */
+.cal-dia.gasto-normal  { border-color: #000000; color: #000000; }
+.cal-dia.gasto-normal:hover { background: #f0f0f0; }
+
+/* Días con gasto urgente (clase legacy, ya no se usa) */
+.cal-dia.urgente-dia { border: 2.5px solid #dc3545; color: #dc3545; font-weight: 700; }
+.cal-dia.urgente-dia:hover { background: #fdecea; }
+
+.cal-punto { display: none; }
+
+/* ===== PRÓXIMOS VENCIMIENTOS ===== */
+.vencimientos-card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.vencimientos-header {
+    background: #000000;
+    color: #ffffff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vencimientos-header i {
+    font-size: 16px;
+}
+
+.vencimientos-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.vencimientos-lista {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.no-vencimientos {
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 13px;
+    padding: 20px;
+}
+
+.vencimiento-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #eeeeee;
+    background: #fafafa;
+    transition: background 0.15s;
+}
+
+.vencimiento-item:hover {
+    background: #f0f0f0;
+}
+
+.vencimiento-dias-badge {
+    min-width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.badge-urgente { background: #fdecea; color: #dc3545; }
+.badge-proximo { background: #fff3cd; color: #856404; }
+.badge-normal  { background: #e8f5e9; color: #2e7d32; }
+.badge-vencido { background: #f5f5f5; color: #999999; }
+.badge-pasado  { background: #e8f5e9; color: #2e7d32; }
+
+.vencimiento-dias-num {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.vencimiento-dias-txt {
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.vencimiento-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.vencimiento-desc {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vencimiento-sede {
+    font-size: 11px;
+    color: #888888;
+    margin-top: 2px;
+}
+
+.vencimiento-monto {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+}
+
+/* ===== MODAL GASTO ===== */
+.modal-gasto-content {
+    max-width: 560px !important;
+    width: 95% !important;
+    text-align: left !important;
+}
+
+.form-gasto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0 8px;
+    text-align: left;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field-full {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333333;
+    text-transform: uppercase;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    padding: 10px 12px;
+    border: 1.5px solid #dddddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: #ffffff;
+    width: 100%;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: #000000;
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* ===== MODAL DÍA DETALLE ===== */
+.dia-gasto-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #eeeeee;
+    margin-bottom: 8px;
+    background: #fafafa;
+}
+
+.dia-gasto-desc {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.dia-gasto-sede {
+    font-size: 11px;
+    color: #888888;
+}
+
+.dia-gasto-monto {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* ===== SCROLLBAR ===== */
+.vencimientos-lista::-webkit-scrollbar { width: 5px; }
+.vencimientos-lista::-webkit-scrollbar-track { background: #f5f5f5; }
+.vencimientos-lista::-webkit-scrollbar-thumb { background: #cccccc; border-radius: 3px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+    .gastos-layout {
+        grid-template-columns: 1fr;
+    }
+    .gastos-calendario-col {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .resumen-cards { grid-template-columns: 1fr; }
+    .gastos-calendario-col { grid-template-columns: 1fr; }
+    .form-gasto-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+    .top-bar { padding: 10px 12px 10px 62px; }
+
+    .gastos-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Ocultar calendario en mobile para ahorrar espacio */
+    .gastos-calendario-col {
+        display: none;
+    }
+
+    .resumen-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .resumen-card {
+        padding: 10px 10px;
+        gap: 8px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .resumen-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .resumen-label { font-size: 10px; }
+    .resumen-valor { font-size: 14px; }
+
+    .gastos-filtros {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filtro-grupo {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+    }
+    .filtro-grupo::-webkit-scrollbar { display: none; }
+
+    .search-box-gastos {
+        width: 100%;
+    }
+
+    .gastos-tabla-container {
+        overflow-x: auto;
+    }
+
+    .gastos-tabla {
+        font-size: 12px;
+        min-width: 500px;
+    }
+
+    .gastos-tabla th,
+    .gastos-tabla td {
+        padding: 8px 8px;
+    }
+}

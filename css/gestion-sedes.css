@@ -1,0 +1,437 @@
+/* Contenedor de sedes */
+.sedes-container {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.sedes-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Buscador */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    border: 2px solid #000000;
+}
+
+.search-box i {
+    color: #000000;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    color: #000000;
+}
+
+.search-box input::placeholder {
+    color: #999999;
+}
+
+/* Grid de sedes */
+.sedes-grid {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de sede */
+.sede-card {
+    background: #ffffff;
+    border: 3px solid #666666;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sede-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    border-color: #444444;
+}
+
+.sede-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 15px;
+}
+
+.sede-icon {
+    width: 50px;
+    height: 50px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.sede-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.sede-nombre {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.sede-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666666;
+    font-size: 14px;
+}
+
+.sede-ubicacion i {
+    color: #999999;
+}
+
+.sede-internet {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.internet-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.internet-status.online {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.internet-status.online i {
+    color: #10b981;
+}
+
+.internet-status.offline {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.internet-status.offline i {
+    color: #ef4444;
+}
+
+/* Loading y empty states */
+.loading, .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999999;
+    grid-column: 1 / -1;
+}
+
+.loading i, .empty-state i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Modal de nueva/editar sede */
+.modal-overlay-sede {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content-sede {
+    background: #ffffff;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s;
+}
+
+.modal-header-sede {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header-sede h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-close-sede {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: #999999;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.modal-close-sede:hover {
+    color: #000000;
+}
+
+#sedeForm {
+    padding: 30px;
+}
+
+.form-group-sede {
+    margin-bottom: 20px;
+}
+
+.form-group-sede label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333333;
+    font-size: 14px;
+}
+
+.form-group-sede input,
+.form-group-sede select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group-sede input:focus,
+.form-group-sede select:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.modal-actions-sede {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-cancel-sede,
+.btn-save-sede {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel-sede {
+    background: #f5f5f5;
+    color: #666666;
+}
+
+.btn-cancel-sede:hover {
+    background: #e0e0e0;
+}
+
+.btn-save-sede {
+    background: #000000;
+    color: #ffffff;
+}
+
+.btn-save-sede:hover {
+    background: #333333;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sedes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Botones de acción en tarjetas */
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.action-btn.edit {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.action-btn.edit:hover {
+    background: #1976d2;
+    color: #ffffff;
+}
+
+/* Modal de confirmación */
+.modal-overlay-confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content-confirm {
+    background: #ffffff;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s;
+    text-align: center;
+}
+
+.modal-icon-confirm {
+    width: 60px;
+    height: 60px;
+    background: #fff3cd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+    color: #856404;
+}
+
+.modal-title-confirm {
+    font-size: 22px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.modal-message-confirm {
+    font-size: 15px;
+    color: #666666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-buttons-confirm {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-cancel-confirm,
+.btn-confirm {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel-confirm {
+    background: #f5f5f5;
+    color: #666666;
+}
+
+.btn-cancel-confirm:hover {
+    background: #e0e0e0;
+}
+
+.btn-confirm {
+    background: #000000;
+    color: #ffffff;
+}
+
+.btn-confirm:hover {
+    background: #333333;
+    transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+    .top-bar { padding: 10px 12px 10px 62px; }
+
+    .search-box {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .sedes-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .sede-card {
+        max-width: 100%;
+    }
+}
