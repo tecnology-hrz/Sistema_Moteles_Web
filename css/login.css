@@ -12,7 +12,8 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #ffffff;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body::before {
@@ -607,5 +608,91 @@ label {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 600px) {
+    body {
+        align-items: flex-start;
+        padding: 20px 16px;
+    }
+
+    .container {
+        padding: 30px 22px;
+        border-radius: 16px;
+        max-width: 100%;
+    }
+
+    .container-registro {
+        max-width: 100%;
+    }
+
+    .logo {
+        margin-bottom: 24px;
+    }
+
+    .logo-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 14px;
+    }
+
+    .logo-icon svg,
+    .logo-icon i {
+        width: 34px;
+        height: 34px;
+        font-size: 34px;
+    }
+
+    .logo h1 {
+        font-size: 22px;
+    }
+
+    .logo p {
+        font-size: 13px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .container .btn {
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .container .btn-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .config-icon {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .config-icon i {
+        font-size: 20px;
+    }
+
+    .config-modal-content {
+        padding: 28px 20px;
+    }
+
+    .config-modal-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .config-modal-icon i {
+        font-size: 28px;
+    }
+
+    .config-modal-title {
+        font-size: 20px;
     }
 }

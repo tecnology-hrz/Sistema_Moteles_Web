@@ -820,6 +820,7 @@
 @media (max-width: 768px) {
     .stats-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
     }
 
     /* Tarjetas de resumen ultra compactas en mobile */
@@ -1088,10 +1089,22 @@
     flex: 1;
 }
 
-/* ===== TOP-BAR RESPONSIVE MOBILE ===== */
-@media (max-width: 768px) {
+/* ===== TOP-BAR RESPONSIVE HABITACIONES ===== */
 
-    /* Ocultar "Todas" y "Reservadas" en mobile */
+/* Desktop: top-bar-row2 es transparente, sus hijos fluyen normal */
+@media (min-width: 769px) {
+    .top-bar-row2 {
+        display: contents;
+    }
+
+    .filter-tab-desktop {
+        display: flex;
+    }
+}
+
+/* ── Tablet (600px – 768px) ── */
+@media (max-width: 768px) and (min-width: 481px) {
+
     .filter-tab-desktop {
         display: none !important;
     }
@@ -1099,7 +1112,7 @@
     .top-bar {
         flex-direction: column;
         align-items: stretch;
-        padding: 10px 12px 10px 62px;
+        padding: 10px 16px 10px 66px;
         gap: 8px;
     }
 
@@ -1113,36 +1126,33 @@
         gap: 8px;
     }
 
-    /* Fila 1: sede (flex:1) + Nueva Habit. + cog */
+    /* Fila superior: sede + botones → alineados a la derecha */
     .top-bar-row2 {
-        order: 1;
         display: flex;
         gap: 8px;
         align-items: center;
         width: 100%;
+        justify-content: flex-end;
     }
 
     .top-bar-row2 .sede-filter {
-        flex: 0 1 160px;
+        flex: 0 1 170px;
         min-width: 0;
-        padding: 10px 12px;
+        height: 42px;
+        padding: 0 12px;
         font-size: 13px;
         border-radius: 10px;
         position: relative;
-        height: 44px;
-        margin-left: auto;
     }
 
-    /* El select dentro del sede-filter necesita ser visible */
     .top-bar-row2 .sede-filter select {
         position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
+        inset: 0;
         width: 100%;
         height: 100%;
         padding-left: 36px;
         padding-right: 12px;
         font-size: 13px;
-        opacity: 1;
     }
 
     .top-bar-row2 .top-bar-btn {
@@ -1151,11 +1161,11 @@
         white-space: nowrap;
         flex-shrink: 0;
         border-radius: 10px;
+        height: 42px;
     }
 
-    /* Fila 2: filtros con scroll */
+    /* Fila inferior: filtros con scroll horizontal */
     .top-bar-actions .filter-tabs {
-        order: 2;
         display: flex;
         gap: 6px;
         overflow-x: auto;
@@ -1163,6 +1173,7 @@
         padding-bottom: 2px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        margin-bottom: 0;
     }
 
     .top-bar-actions .filter-tabs::-webkit-scrollbar {
@@ -1180,9 +1191,139 @@
     }
 }
 
-/* Desktop: top-bar-row2 es invisible como contenedor, sus hijos se comportan normal */
-@media (min-width: 769px) {
+/* ── Mobile pequeño (≤ 480px) ── */
+@media (max-width: 480px) {
+
+    .filter-tab-desktop {
+        display: none !important;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px 10px 8px 58px;
+        gap: 6px;
+    }
+
+    .top-bar-left {
+        display: none;
+    }
+
+    .top-bar-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    /* Fila 1: botones alineados a la derecha */
     .top-bar-row2 {
-        display: contents;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .top-bar-row2 .sede-filter {
+        flex: 0 1 150px;
+        min-width: 0;
+        height: 40px;
+        padding: 0 10px;
+        border-radius: 8px;
+        position: relative;
+        border-width: 1.5px;
+    }
+
+    .top-bar-row2 .sede-filter i {
+        font-size: 12px;
+    }
+
+    .top-bar-row2 .sede-filter select {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        padding-left: 30px;
+        padding-right: 8px;
+        font-size: 12px;
+    }
+
+    /* "Nueva Habitación" con texto visible */
+    .top-bar-row2 .top-bar-btn {
+        flex-shrink: 0;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 12px;
+        border-radius: 8px;
+        gap: 5px;
+    }
+
+    /* Mostrar texto del botón en móvil */
+    .top-bar-row2 .top-bar-btn .btn-text {
+        display: inline;
+    }
+
+    /* Fila 2: filtros con scroll */
+    .top-bar-actions .filter-tabs {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 2px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-bottom: 0;
+    }
+
+    .top-bar-actions .filter-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-tab {
+        font-size: 11px;
+        padding: 7px 10px;
+        gap: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        border-radius: 16px;
+        border-width: 1.5px;
+    }
+
+    .filter-tab i {
+        font-size: 11px;
+    }
+
+    /* Stats grid en 3 columnas compactas */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+    }
+
+    .stat-card {
+        padding: 5px 6px;
+        gap: 5px;
+        border-width: 1.5px;
+        border-radius: 7px;
+    }
+
+    .stat-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+        border-radius: 5px;
+    }
+
+    .stat-value {
+        font-size: 14px;
+    }
+
+    .stat-label {
+        font-size: 8px;
+    }
+
+    /* Grid de habitaciones: mínimo 3 por fila en móvil */
+    .habitaciones-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
     }
 }

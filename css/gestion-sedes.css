@@ -421,6 +421,10 @@
 @media (max-width: 768px) {
     .top-bar { padding: 10px 12px 10px 62px; }
 
+    .sedes-header {
+        padding: 14px 14px;
+    }
+
     .search-box {
         min-width: unset;
         max-width: 100%;
@@ -429,9 +433,24 @@
 
     .sedes-grid {
         grid-template-columns: 1fr !important;
+        padding: 16px 14px;
+        gap: 12px;
     }
 
     .sede-card {
         max-width: 100%;
+    }
+
+    .sede-nombre {
+        font-size: 16px;
+    }
+
+    .sede-actions {
+        gap: 6px;
+    }
+
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 12px;
     }
 }

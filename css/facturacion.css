@@ -1153,6 +1153,52 @@
 
     .facturas-grid {
         grid-template-columns: 1fr !important;
+        padding: 14px 14px;
+        gap: 14px;
+    }
+
+    .factura-total-valor {
+        font-size: 24px;
+    }
+
+    .factura-detalle-total-valor {
+        font-size: 24px;
+    }
+
+    .historial-facturacion-filtros {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .historial-facturacion-filtros-izq {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .historial-facturacion-filtros-reportes {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .historial-facturacion-campo input[type="date"],
+    .historial-facturacion-campo select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .historial-facturacion-acciones-rapidas {
+        width: 100%;
+    }
+
+    .historial-facturacion-tabla-wrap {
+        height: calc(100vh - 420px);
+        min-height: 250px;
+    }
+
+    .facturacion-panel--historial {
+        padding: 14px 14px 20px;
     }
 
     .data-table {
@@ -1167,6 +1213,27 @@
     .table-acciones {
         flex-direction: column;
         gap: 4px;
+    }
+
+    .metodo-pago-selector {
+        gap: 6px;
+    }
+
+    .metodo-pago-btn {
+        padding: 10px 8px;
+    }
+
+    .metodo-pago-btn i {
+        font-size: 18px;
+    }
+
+    .metodo-pago-btn span {
+        font-size: 12px;
+    }
+
+    .modalidad-selector {
+        flex-direction: column;
+        gap: 8px;
     }
 
     .search-box {

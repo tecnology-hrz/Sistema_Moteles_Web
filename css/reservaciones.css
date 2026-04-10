@@ -207,4 +207,26 @@
     .reserva-card {
         max-width: 100%;
     }
+
+    .reserva-card-header {
+        padding: 12px 14px;
+    }
+
+    .reserva-card-header-info h3 {
+        font-size: 15px;
+    }
+
+    .reserva-card-body {
+        padding: 10px 14px;
+    }
+
+    .reserva-card-actions {
+        padding: 10px 14px;
+        gap: 8px;
+    }
+
+    .reserva-btn {
+        padding: 10px;
+        font-size: 12px;
+    }
 }

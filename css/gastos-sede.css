@@ -615,9 +615,11 @@
         grid-template-columns: 1fr;
     }
 
-    /* Ocultar calendario en mobile para ahorrar espacio */
+    /* Mostrar calendario en mobile pero compacto */
     .gastos-calendario-col {
-        display: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .resumen-cards {
@@ -669,5 +671,25 @@
     .gastos-tabla th,
     .gastos-tabla td {
         padding: 8px 8px;
+    }
+
+    /* Calendario compacto en mobile */
+    .cal-dia {
+        font-size: 11px;
+        min-height: 30px;
+        border-radius: 6px;
+    }
+
+    .calendario-dias-semana span {
+        font-size: 9px;
+        padding: 6px 0;
+    }
+
+    .vencimientos-lista {
+        max-height: 200px;
+    }
+
+    .form-gasto-grid {
+        grid-template-columns: 1fr;
     }
 }

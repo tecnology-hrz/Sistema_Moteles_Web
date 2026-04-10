@@ -284,24 +284,57 @@ body::before {
 }
 
 @media (max-width: 768px) {
-    .header h1 {
-        font-size: 28px;
+    body {
+        padding: 20px 14px;
     }
-    
+
+    .header {
+        margin-bottom: 28px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+        gap: 10px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
     .btn-back {
         position: static;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         width: fit-content;
+        font-size: 13px;
+        padding: 10px 16px;
     }
-    
+
+    .config-section {
+        padding: 18px 14px;
+        margin-bottom: 18px;
+        border-radius: 14px;
+    }
+
+    .section-header h2 {
+        font-size: 18px;
+    }
+
     .sedes-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
-}
 
-/* ===== RESPONSIVE MOBILE ===== */
-@media (max-width: 768px) {
-    .top-bar { padding: 10px 12px 10px 62px; }
+    .sede-card {
+        padding: 18px 16px;
+    }
+
+    .sede-actual-card {
+        padding: 20px 16px;
+    }
+
+    .sede-actual-card h3 {
+        font-size: 22px;
+    }
 
     .config-grid,
     .configuracion-grid {
