@@ -692,4 +692,93 @@
     .form-gasto-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Modal de gasto responsivo */
+    .modal-gasto-content {
+        max-width: 95% !important;
+        width: 95% !important;
+        border-radius: 14px;
+    }
+
+    .form-gasto-grid {
+        gap: 12px;
+        margin: 14px 0 6px;
+    }
+
+    .form-field label {
+        font-size: 11px;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    /* Modal de día detalle responsivo */
+    .dia-gasto-item {
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+    }
+
+    .dia-gasto-desc {
+        font-size: 12px;
+    }
+
+    .dia-gasto-sede {
+        font-size: 10px;
+    }
+
+    .dia-gasto-monto {
+        font-size: 13px;
+    }
+
+    /* Vencimientos responsivo */
+    .vencimiento-item {
+        padding: 8px 10px;
+        gap: 10px;
+    }
+
+    .vencimiento-dias-badge {
+        min-width: 38px;
+        height: 38px;
+    }
+
+    .vencimiento-dias-num {
+        font-size: 14px;
+    }
+
+    .vencimiento-dias-txt {
+        font-size: 8px;
+    }
+
+    .vencimiento-desc {
+        font-size: 12px;
+    }
+
+    .vencimiento-sede {
+        font-size: 10px;
+    }
+
+    .vencimiento-monto {
+        font-size: 12px;
+    }
+
+    /* Calendario header responsivo */
+    .calendario-header {
+        padding: 12px 16px;
+    }
+
+    .cal-titulo {
+        font-size: 14px;
+    }
+
+    .cal-nav-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
 }

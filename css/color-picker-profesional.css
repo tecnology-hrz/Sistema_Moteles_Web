@@ -461,37 +461,211 @@
     }
 }
 
-/* Responsive */
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE MOBILE - COLOR PICKER Y MODAL OCUPAR
+   ═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
+    /* ── Color Picker Modal ── */
     .color-picker-modal {
         width: 95%;
-        max-height: 85vh;
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 14px;
     }
-    
+
+    .color-picker-header {
+        padding: 14px 16px;
+    }
+
+    .color-picker-header h3 {
+        font-size: 15px;
+    }
+
+    .color-picker-body {
+        padding: 14px;
+        max-height: 65vh;
+    }
+
     .color-cell {
-        height: 26px;
+        height: 28px;
+        border-radius: 3px;
     }
-    
+
+    .color-row {
+        gap: 2px;
+    }
+
+    .color-picker-grid {
+        gap: 2px;
+    }
+
+    .btn-custom-color {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .color-picker-footer {
+        padding: 10px 14px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-cancel-color,
+    .btn-confirm-color {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    /* ── Modal Ocupar Habitación ── */
     .modal-ocupar-container {
         width: 95%;
+        max-width: 100%;
+        max-height: 92vh;
+        border-radius: 14px;
     }
-    
-    .form-row-ocupar {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-    
-    .tipo-vehiculo-selector {
-        grid-template-columns: 1fr;
-    }
-    
-    .modal-ocupar-body {
-        padding: 16px 20px;
-    }
-    
+
     .modal-ocupar-header {
-        padding: 16px 20px;
+        padding: 14px 18px;
+    }
+
+    .modal-ocupar-header h2 {
+        font-size: 16px;
+        gap: 8px;
+    }
+
+    .modal-ocupar-header h2 i {
+        font-size: 18px;
+    }
+
+    .modal-ocupar-header h2 .habitacion-numero {
+        font-size: 14px;
+    }
+
+    .modal-ocupar-body {
+        padding: 16px 18px;
+        max-height: 60vh;
+    }
+
+    .form-row-ocupar {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-group-ocupar {
+        margin-bottom: 16px;
+    }
+
+    .form-group-ocupar.form-group-half {
+        flex: 1 1 100%;
+        margin-bottom: 16px;
+    }
+
+    .form-group-ocupar label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .form-group-ocupar input[type="text"],
+    .form-group-ocupar textarea,
+    .form-group-ocupar input[type="number"],
+    .select-estancia,
+    .input-precio-total {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .form-group-ocupar small {
+        font-size: 11px;
+    }
+
+    /* ── Selector de Tipo de Vehículo ── */
+    .tipo-vehiculo-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .tipo-vehiculo-btn {
+        padding: 12px 10px;
+        font-size: 12px;
+        gap: 6px;
+        border-radius: 8px;
+    }
+
+    .tipo-vehiculo-btn i {
+        font-size: 22px;
+    }
+
+    /* ── Selector de Color ── */
+    .color-selector-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .color-preview-circle {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* ── Footer del Modal Ocupar ── */
+    .modal-ocupar-footer {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-ocupar-cancelar,
+    .btn-ocupar-confirmar {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .color-picker-modal {
+        width: 98%;
+        border-radius: 12px;
+    }
+
+    .color-cell {
+        height: 24px;
+    }
+
+    .modal-ocupar-container {
+        width: 98%;
+        border-radius: 12px;
+    }
+
+    .modal-ocupar-header {
+        padding: 12px 14px;
+    }
+
+    .modal-ocupar-header h2 {
+        font-size: 15px;
+    }
+
+    .modal-ocupar-body {
+        padding: 14px 16px;
+    }
+
+    .tipo-vehiculo-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tipo-vehiculo-btn {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    .tipo-vehiculo-btn i {
+        font-size: 20px;
+    }
+
+    .modal-ocupar-footer {
+        padding: 10px 14px;
     }
 }
 

@@ -453,4 +453,86 @@
         padding: 6px 10px;
         font-size: 12px;
     }
+
+    /* Modal de sede responsivo */
+    .modal-content-sede {
+        width: 95%;
+        max-width: 100%;
+        border-radius: 14px;
+    }
+
+    .modal-header-sede {
+        padding: 18px 20px;
+    }
+
+    .modal-header-sede h2 {
+        font-size: 18px;
+        gap: 8px;
+    }
+
+    #sedeForm {
+        padding: 20px;
+    }
+
+    .form-group-sede {
+        margin-bottom: 16px;
+    }
+
+    .form-group-sede label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .form-group-sede input,
+    .form-group-sede select {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .modal-actions-sede {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    .btn-cancel-sede,
+    .btn-save-sede {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+
+    /* Modal de confirmación responsivo */
+    .modal-content-confirm {
+        width: 92%;
+        padding: 24px 18px;
+        border-radius: 14px;
+    }
+
+    .modal-icon-confirm {
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+    }
+
+    .modal-title-confirm {
+        font-size: 18px;
+    }
+
+    .modal-message-confirm {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .modal-buttons-confirm {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-cancel-confirm,
+    .btn-confirm {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
 }

@@ -858,6 +858,7 @@
     .modal-permisos-profesional {
         max-width: 95% !important;
         width: 95% !important;
+        max-height: 90vh !important;
     }
     
     .permisos-lista {
@@ -865,11 +866,43 @@
     }
     
     .modal-body-permisos {
-        padding: 20px 15px;
+        padding: 16px 14px;
     }
     
     .modal-footer-fixed {
-        padding: 15px 15px;
+        padding: 14px 14px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-footer-fixed .btn-secondary,
+    .modal-footer-fixed .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .permisos-categoria {
+        margin-bottom: 12px;
+    }
+
+    .permisos-categoria-titulo {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .permisos-lista {
+        padding: 10px 14px;
+        gap: 6px;
+    }
+
+    .permiso-item {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .permiso-item input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -954,5 +987,91 @@
     .action-buttons {
         flex-direction: column;
         gap: 4px;
+    }
+
+    /* Modal de edición responsivo */
+    .modal-content-edit {
+        width: 95%;
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+
+    .modal-header-edit {
+        padding: 18px 20px;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .modal-header-edit h2 {
+        font-size: 18px;
+        gap: 10px;
+    }
+
+    #editForm,
+    #newUserForm {
+        padding: 20px;
+    }
+
+    .form-group-edit {
+        margin-bottom: 16px;
+    }
+
+    .form-group-edit label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .form-group-edit input,
+    .form-group-edit select {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .modal-actions-edit {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 24px;
+        padding-top: 16px;
+    }
+
+    .btn-cancel-edit,
+    .btn-save-edit {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+
+    /* Modal de confirmación responsivo */
+    .modal-content-confirm {
+        width: 92%;
+        padding: 24px 18px;
+        border-radius: 14px;
+    }
+
+    .modal-icon-confirm {
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+    }
+
+    .modal-title-confirm {
+        font-size: 18px;
+    }
+
+    .modal-message-confirm {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .modal-buttons-confirm {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-cancel-confirm,
+    .btn-confirm {
+        padding: 12px 18px;
+        font-size: 14px;
     }
 }

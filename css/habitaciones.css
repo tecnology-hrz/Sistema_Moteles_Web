@@ -816,6 +816,38 @@
     font-size: 14px;
 }
 
+/* ===== RESPONSIVE MODAL DETALLES ===== */
+@media (max-width: 768px) {
+    .detalles-container {
+        gap: 14px;
+    }
+
+    .detalle-section {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .detalle-section h3 {
+        font-size: 14px;
+        margin-bottom: 12px;
+        gap: 8px;
+    }
+
+    .detalle-row {
+        padding: 6px 0;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .detalle-label {
+        font-size: 12px;
+    }
+
+    .detalle-valor {
+        font-size: 13px;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .stats-grid {

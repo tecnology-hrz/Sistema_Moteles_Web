@@ -1623,3 +1623,508 @@
     z-index: 10;
     pointer-events: none;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE MOBILE - MODALES Y CONTENEDORES
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    /* ── Modal básico ── */
+    .modal-content {
+        padding: 28px 20px;
+        max-width: 95%;
+        border-radius: 16px;
+    }
+
+    .modal-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .modal-message {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .modal-button {
+        padding: 12px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-buttons .modal-button {
+        width: 100%;
+    }
+
+    /* ── Modal de formulario ── */
+    .modal-container {
+        max-width: 95% !important;
+        width: 95% !important;
+        max-height: 92vh;
+        border-radius: 16px;
+        margin: 16px;
+    }
+
+    .modal-header {
+        padding: 18px 20px;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+        gap: 8px;
+    }
+
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-container .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .modal-container .form-group {
+        margin-bottom: 16px;
+    }
+
+    .modal-container .form-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .modal-container .form-group input,
+    .modal-container .form-group select,
+    .modal-container .form-group textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .modal-footer {
+        padding: 16px 20px;
+        gap: 10px;
+        flex-direction: column-reverse;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .modal-footer .btn-primary,
+    .modal-footer .btn-secondary {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+        justify-content: center;
+    }
+
+    /* ── Modal de confirmación ── */
+    .modal-content-confirm {
+        padding: 28px 20px;
+        max-width: 92%;
+        border-radius: 16px;
+    }
+
+    .modal-icon-confirm {
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .modal-title-confirm {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .modal-message-confirm {
+        font-size: 14px;
+        margin-bottom: 22px;
+    }
+
+    .modal-buttons-confirm {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-confirm,
+    .btn-cancel-confirm {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    /* ── Modal de consumos ── */
+    .modal-overlay.consumos-modal-overlay.active {
+        padding: 12px 10px;
+    }
+
+    .consumos-modal-container--amplio {
+        max-width: 100%;
+        width: 100%;
+        max-height: calc(100vh - 24px);
+        border-radius: 16px;
+    }
+
+    .consumos-modal-container--amplio.consumos-modal-layout {
+        height: calc(100vh - 24px);
+        max-height: calc(100vh - 24px);
+    }
+
+    .modal-header.consumos-modal-header--compacto {
+        padding: 16px 18px 14px;
+    }
+
+    .consumos-modal-titulo-principal {
+        font-size: 1.2rem;
+    }
+
+    .consumos-modal-subtitulo {
+        font-size: 0.95rem;
+    }
+
+    .consumos-modal-body.consumos-modal-scroll {
+        padding: 16px 18px 20px;
+    }
+
+    .consumos-modal-seccion--agregar {
+        margin-left: -18px;
+        margin-right: -18px;
+        padding: 14px 18px 16px;
+    }
+
+    .consumos-modal-seccion--pendiente {
+        margin-left: -18px;
+        margin-right: -18px;
+        padding: 16px 18px 10px;
+    }
+
+    .consumos-buscar-input {
+        padding: 12px 14px 12px 44px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+    .consumos-buscar-icono {
+        left: 14px;
+        font-size: 15px;
+    }
+
+    .consumos-modal-resultados {
+        max-height: min(280px, 32vh);
+    }
+
+    .consumos-resultado-fila {
+        padding: 12px 14px;
+        gap: 10px;
+        border-radius: 12px;
+    }
+
+    .consumos-resultado-nombre {
+        font-size: 14px;
+    }
+
+    .consumos-resultado-meta {
+        font-size: 12px;
+    }
+
+    .consumos-resultado-btn-anadir {
+        width: 42px;
+        height: 42px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .consumos-pendiente-fila {
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        padding: 14px 16px;
+        border-radius: 12px;
+    }
+
+    .consumos-pendiente-sub {
+        font-size: 14px;
+        min-width: 70px;
+    }
+
+    .consumo-contador-cantidad--compacto .consumo-btn-menos,
+    .consumo-contador-cantidad--compacto .consumo-btn-mas {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .consumo-contador-cantidad--compacto .consumo-input-cantidad {
+        width: 48px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .consumos-modal-pie-fijo {
+        padding: 14px 18px 18px;
+    }
+
+    .consumos-modal-total-lote {
+        font-size: 15px;
+        padding: 12px 4px;
+    }
+
+    .consumos-modal-total-lote strong {
+        font-size: 1.2rem;
+    }
+
+    .consumos-modal-btn-confirmar {
+        padding: 14px 20px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+    .consumos-modal-btn-agregar {
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+
+    .consumos-modal-lista--guardados li {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    /* ── Selector múltiple de productos ── */
+    .consumos-selector-container {
+        width: 100%;
+        height: calc(100vh - 32px);
+        max-height: calc(100vh - 32px);
+        border-radius: 16px;
+    }
+
+    .consumos-selector-header {
+        padding: 18px 18px 16px;
+    }
+
+    .consumos-selector-titulo {
+        font-size: 1.3rem;
+    }
+
+    .consumos-selector-sub {
+        font-size: 13px;
+    }
+
+    .consumos-selector-buscar-wrap {
+        padding: 12px 18px;
+    }
+
+    .consumos-selector-buscar-input {
+        padding: 14px 16px 14px 48px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+    .consumos-selector-buscar-icono {
+        left: 34px;
+        font-size: 16px;
+    }
+
+    .consumos-selector-lista-wrap {
+        padding: 14px 18px;
+    }
+
+    .consumos-selector-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .consumos-selector-item {
+        padding: 14px 16px;
+        gap: 12px;
+        border-radius: 12px;
+    }
+
+    .consumos-selector-check {
+        width: 20px;
+        height: 20px;
+    }
+
+    .consumos-selector-item-nombre {
+        font-size: 15px;
+    }
+
+    .consumos-selector-item-meta {
+        font-size: 12px;
+    }
+
+    .consumos-selector-pie {
+        padding: 14px 18px 18px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .consumos-selector-contador {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .consumos-selector-pie-botones {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .consumos-selector-btn-secundario,
+    .consumos-selector-btn-primario {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+        justify-content: center;
+    }
+
+    /* ── Menú de acciones de habitación ── */
+    .menu-acciones-lista {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-accion-btn {
+        flex-direction: row;
+        padding: 16px 18px;
+        gap: 14px;
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .menu-accion-btn i {
+        font-size: 22px;
+        width: 28px;
+        text-align: center;
+    }
+
+    /* ── Grilla cambio de habitación ── */
+    .cambio-hab-grid {
+        max-height: 300px;
+    }
+
+    .cambio-hab-card {
+        padding: 10px 12px;
+        gap: 10px;
+        border-radius: 10px;
+    }
+
+    .cambio-hab-numero {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .cambio-hab-nombre {
+        font-size: 13px;
+    }
+
+    .cambio-hab-sede,
+    .cambio-hab-precio {
+        font-size: 10px;
+    }
+
+    /* ── Time picker ── */
+    .tp-ampm-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE EXTRA SMALL (≤ 480px)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 24px 16px;
+        border-radius: 14px;
+    }
+
+    .modal-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+    }
+
+    .modal-title {
+        font-size: 18px;
+    }
+
+    .modal-message {
+        font-size: 13px;
+    }
+
+    .modal-container {
+        margin: 10px;
+        border-radius: 14px;
+    }
+
+    .modal-header {
+        padding: 14px 16px;
+    }
+
+    .modal-header h2 {
+        font-size: 16px;
+    }
+
+    .modal-body {
+        padding: 16px;
+    }
+
+    .modal-footer {
+        padding: 14px 16px;
+    }
+
+    .modal-content-confirm {
+        padding: 24px 16px;
+    }
+
+    .modal-icon-confirm {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+    }
+
+    .modal-title-confirm {
+        font-size: 18px;
+    }
+
+    .consumos-modal-titulo-principal {
+        font-size: 1.1rem;
+    }
+
+    .consumos-modal-subtitulo {
+        font-size: 0.9rem;
+    }
+
+    .consumos-selector-titulo {
+        font-size: 1.15rem;
+    }
+
+    .consumos-modal-btn-confirmar {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .menu-accion-btn {
+        padding: 14px 16px;
+    }
+
+    .menu-accion-btn i {
+        font-size: 20px;
+    }
+}

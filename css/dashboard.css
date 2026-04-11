@@ -1042,4 +1042,39 @@ body {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Modal de confirmación responsivo */
+    .modal-content-confirm {
+        width: 92%;
+        padding: 24px 18px;
+        border-radius: 12px;
+    }
+
+    .modal-icon-confirm {
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .modal-title-confirm {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .modal-message-confirm {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .modal-buttons-confirm {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-cancel-confirm,
+    .btn-confirm {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
 }

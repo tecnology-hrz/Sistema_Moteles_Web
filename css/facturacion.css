@@ -1241,4 +1241,109 @@
         max-width: 100%;
         width: 100%;
     }
+
+    /* Modal de facturación responsivo */
+    .modal-facturacion-amplio {
+        max-width: 95% !important;
+        width: 95% !important;
+    }
+
+    .factura-dos-columnas {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .factura-detalle-section {
+        padding: 16px;
+        border-radius: 10px;
+        margin-bottom: 16px;
+    }
+
+    .factura-detalle-titulo {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .factura-detalle-row {
+        padding: 8px 0;
+    }
+
+    .factura-detalle-label,
+    .factura-detalle-valor {
+        font-size: 13px;
+    }
+
+    .factura-detalle-total {
+        padding: 16px;
+        border-radius: 10px;
+        margin-top: 16px;
+    }
+
+    .factura-detalle-total-label {
+        font-size: 16px;
+    }
+
+    .factura-detalle-total-valor {
+        font-size: 24px;
+    }
+
+    /* Selector de método de pago responsivo */
+    .metodo-pago-selector {
+        flex-direction: column;
+    }
+
+    .metodo-pago-btn {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 14px 16px;
+        gap: 12px;
+    }
+
+    .metodo-pago-btn i {
+        font-size: 20px;
+    }
+
+    .metodo-pago-btn span {
+        font-size: 14px;
+    }
+
+    /* Formulario de pago responsivo */
+    .form-row-pago {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .form-group-pago {
+        width: 100%;
+    }
+
+    .form-input,
+    .form-select {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .cambio-display {
+        padding: 12px;
+    }
+
+    .cambio-valor {
+        font-size: 20px;
+    }
+
+    /* Días selector responsivo */
+    .dias-input-group {
+        flex-wrap: wrap;
+    }
+
+    .dias-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .dias-input {
+        flex: 1;
+        min-width: 60px;
+    }
 }

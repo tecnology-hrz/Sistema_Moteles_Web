@@ -614,14 +614,18 @@ label {
 /* ===== RESPONSIVE MOBILE ===== */
 @media (max-width: 600px) {
     body {
-        align-items: flex-start;
-        padding: 20px 16px;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        min-height: 100vh;
+        min-height: 100dvh; /* Dynamic viewport height para móviles */
     }
 
     .container {
         padding: 30px 22px;
         border-radius: 16px;
         max-width: 100%;
+        margin: auto;
     }
 
     .container-registro {
@@ -681,6 +685,7 @@ label {
 
     .config-modal-content {
         padding: 28px 20px;
+        width: 92%;
     }
 
     .config-modal-icon {
@@ -694,5 +699,15 @@ label {
 
     .config-modal-title {
         font-size: 20px;
+    }
+
+    .config-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .config-btn {
+        width: 100%;
+        padding: 12px;
     }
 }
