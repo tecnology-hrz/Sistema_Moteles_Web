@@ -893,151 +893,151 @@
 
     .habitaciones-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
+        gap: 6px;
         justify-content: stretch;
     }
 
     /* Tarjetas compactas en mobile */
     .habitacion-card {
         max-width: 100%;
-        font-size: 8px;
+        font-size: 9px;
         border-width: 1.5px;
-        border-radius: 8px;
+        border-radius: 9px;
     }
 
     .habitacion-numero-badge {
-        font-size: 8px;
-        padding: 2px 5px;
-        border-radius: 5px;
+        font-size: 9px;
+        padding: 3px 6px;
+        border-radius: 6px;
         gap: 3px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
 
     .habitacion-numero-badge i {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-estado-etiqueta {
-        font-size: 6px;
+        font-size: 7px;
         gap: 2px;
     }
 
     .habitacion-estado-etiqueta i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-titulo {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-zona {
-        padding-left: 4px;
-        padding-right: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
     .habitacion-zona-cabecera {
-        padding-top: 5px;
-        padding-bottom: 4px;
+        padding-top: 7px;
+        padding-bottom: 5px;
     }
 
     .habitacion-zona-info {
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 6px;
+        padding-bottom: 6px;
     }
 
     .habitacion-zona-acciones {
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .habitacion-fila-titulo {
-        gap: 2px;
-        margin-bottom: 3px;
+        gap: 3px;
+        margin-bottom: 4px;
     }
 
     .habitacion-sede-chip {
-        font-size: 6.5px;
-        padding: 1px 4px;
+        font-size: 7px;
+        padding: 2px 5px;
     }
 
     .habitacion-fila-meta {
-        margin-bottom: 4px;
-        gap: 3px;
+        margin-bottom: 5px;
+        gap: 4px;
     }
 
     .habitacion-capacidad {
-        font-size: 7px;
-        gap: 2px;
+        font-size: 8px;
+        gap: 3px;
     }
 
     .habitacion-capacidad i {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-precio {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-campo-estado {
-        padding: 2px 4px;
-        gap: 3px;
-        border-radius: 5px;
+        padding: 3px 5px;
+        gap: 4px;
+        border-radius: 6px;
     }
 
     .habitacion-campo-estado--ocupada span,
     .habitacion-campo-estado--muted span {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-campo-estado--ocupada i,
     .habitacion-campo-estado--muted i {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-campo-estado--limpieza .limpieza-valor {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-campo-estado--limpieza i {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-campo-estado--reparacion {
-        font-size: 7px;
-        padding: 2px 4px;
+        font-size: 8px;
+        padding: 3px 5px;
         gap: 3px;
     }
 
     .habitacion-campo-estado--reparacion i {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .habitacion-btn-acciones {
-        font-size: 8px;
-        padding: 4px 5px;
-        border-radius: 5px;
+        font-size: 9px;
+        padding: 5px 6px;
+        border-radius: 6px;
         border-width: 1.5px;
         gap: 3px;
     }
 
     .habitacion-btn-acciones i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-btn {
-        font-size: 7px;
-        padding: 4px 2px;
+        font-size: 8px;
+        padding: 5px 3px;
         gap: 2px;
-        border-radius: 5px;
+        border-radius: 6px;
     }
 
     .habitacion-btn i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .vehiculo-color-circle {
-        width: 10px;
-        height: 10px;
+        width: 11px;
+        height: 11px;
     }
 
     .habitacion-cuerpo {
@@ -1062,26 +1062,21 @@
 
     /* Sobreescribir estilos inline de tarifas y lápiz en tarjetas */
     .habitacion-precio > div:first-child {
-        font-size: 7px !important;
+        font-size: 8px !important;
         margin-bottom: 2px !important;
     }
 
     .habitacion-precio > div:last-child {
-        font-size: 7px !important;
-        line-height: 1.2 !important;
+        font-size: 8px !important;
+        line-height: 1.3 !important;
     }
 
     .habitacion-precio > div:last-child div {
-        font-size: 7px !important;
+        font-size: 8px !important;
     }
 
     .habitacion-btn-icon {
-        padding: 2px 4px !important;
-    }
-
-    .habitacion-btn-icon .fa-edit,
-    .habitacion-btn-icon .fa-pen {
-        font-size: 9px !important;
+        display: none !important;
     }
 }
 
@@ -1399,174 +1394,169 @@
     /* Grid de habitaciones: 3 por fila, ultra compacto */
     .habitaciones-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 4px;
+        gap: 5px;
     }
 
     .habitacion-card {
-        border-radius: 7px;
+        border-radius: 8px;
         border-width: 1.5px;
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-zona {
-        padding-left: 3px;
-        padding-right: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .habitacion-zona-cabecera {
-        padding-top: 4px;
-        padding-bottom: 3px;
+        padding-top: 6px;
+        padding-bottom: 4px;
     }
 
     .habitacion-zona-info {
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .habitacion-zona-acciones {
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding-top: 4px;
+        padding-bottom: 4px;
     }
 
     .habitacion-numero-badge {
-        font-size: 7px;
-        padding: 2px 4px;
-        border-radius: 4px;
+        font-size: 8px;
+        padding: 2px 5px;
+        border-radius: 5px;
         gap: 2px;
     }
 
     .habitacion-numero-badge i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-estado-etiqueta {
-        font-size: 5.5px;
+        font-size: 6px;
         gap: 1px;
     }
 
     .habitacion-estado-etiqueta i {
-        font-size: 6px;
+        font-size: 7px;
     }
 
     .habitacion-titulo {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-fila-titulo {
         gap: 2px;
-        margin-bottom: 2px;
+        margin-bottom: 3px;
     }
 
     .habitacion-sede-chip {
-        font-size: 6px;
-        padding: 1px 3px;
+        font-size: 6.5px;
+        padding: 1px 4px;
     }
 
     .habitacion-fila-meta {
-        margin-bottom: 3px;
-        gap: 2px;
+        margin-bottom: 4px;
+        gap: 3px;
     }
 
     .habitacion-capacidad {
-        font-size: 6.5px;
+        font-size: 7px;
         gap: 2px;
     }
 
     .habitacion-capacidad i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-precio {
-        font-size: 6.5px;
+        font-size: 7px;
     }
 
     .habitacion-campo-estado {
-        padding: 2px 3px;
-        gap: 2px;
-        border-radius: 4px;
+        padding: 3px 4px;
+        gap: 3px;
+        border-radius: 5px;
     }
 
     .habitacion-campo-estado--ocupada span,
     .habitacion-campo-estado--muted span {
-        font-size: 6.5px;
+        font-size: 7px;
     }
 
     .habitacion-campo-estado--ocupada i,
     .habitacion-campo-estado--muted i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-campo-estado--limpieza .limpieza-valor {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-campo-estado--limpieza i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-campo-estado--reparacion {
-        font-size: 6px;
-        padding: 2px 3px;
+        font-size: 7px;
+        padding: 3px 4px;
         gap: 2px;
     }
 
     .habitacion-campo-estado--reparacion i {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .habitacion-btn-acciones {
-        font-size: 7px;
-        padding: 3px 4px;
-        border-radius: 4px;
+        font-size: 8px;
+        padding: 4px 5px;
+        border-radius: 5px;
         border-width: 1.5px;
         gap: 2px;
     }
 
     .habitacion-btn-acciones i {
-        font-size: 6px;
+        font-size: 7px;
     }
 
     .habitacion-btn {
-        font-size: 6.5px;
-        padding: 3px 2px;
+        font-size: 7px;
+        padding: 4px 3px;
         gap: 2px;
-        border-radius: 4px;
+        border-radius: 5px;
     }
 
     .habitacion-btn i {
-        font-size: 6.5px;
+        font-size: 7px;
     }
 
     .habitacion-cuerpo {
-        padding: 0;
+        padding: 0 1px;
     }
 
     .vehiculo-color-circle {
-        width: 8px;
-        height: 8px;
+        width: 9px;
+        height: 9px;
     }
 
     /* Sobreescribir estilos inline de tarifas y lápiz en tarjetas */
     .habitacion-precio > div:first-child {
-        font-size: 6px !important;
+        font-size: 7px !important;
         margin-bottom: 1px !important;
     }
 
     .habitacion-precio > div:last-child {
-        font-size: 6px !important;
+        font-size: 7px !important;
         line-height: 1.2 !important;
     }
 
     .habitacion-precio > div:last-child div {
-        font-size: 6px !important;
+        font-size: 7px !important;
     }
 
     .habitacion-btn-icon {
-        padding: 1px 3px !important;
-    }
-
-    .habitacion-btn-icon .fa-edit,
-    .habitacion-btn-icon .fa-pen {
-        font-size: 7px !important;
+        display: none !important;
     }
 }
