@@ -83,7 +83,14 @@ window.addEventListener('DOMContentLoaded', () => {
     const sesion = localStorage.getItem('sesionActiva');
     if (sesion) {
         const datos = JSON.parse(sesion);
-        window.location.href = 'dasboard-admin.html';
+        const DOS_ANOS_MS = 2 * 365 * 24 * 60 * 60 * 1000;
+        const ahora = new Date().getTime();
+        if (datos.timestamp && (ahora - datos.timestamp) < DOS_ANOS_MS) {
+            window.location.href = 'dasboard-admin.html';
+        } else {
+            // Sesión expirada, limpiar
+            localStorage.removeItem('sesionActiva');
+        }
     }
 });
 
@@ -114,7 +121,7 @@ loginForm.addEventListener('submit', async (e) => {
                 username: username,
                 rol: resultado.rol,
                 permisos: resultado.permisos || {},
-                timestamp: new Date().getTime()
+                timestamp: new Date().getTime() // se usa para calcular expiración (2 años)
             };
             localStorage.setItem('sesionActiva', JSON.stringify(datosSesion));
             

@@ -171,12 +171,19 @@ const api = {
     async cargar_sesion() {
         try {
             const s = localStorage.getItem('sesionActiva');
-            return s ? JSON.parse(s) : null;
+            if (!s) return null;
+            const datos = JSON.parse(s);
+            const DOS_ANOS_MS = 2 * 365 * 24 * 60 * 60 * 1000;
+            const ahora = new Date().getTime();
+            if (datos.timestamp && (ahora - datos.timestamp) < DOS_ANOS_MS) return datos;
+            // Sesión expirada
+            localStorage.removeItem('sesionActiva');
+            return null;
         } catch { return null; }
     },
 
     guardar_sesion(username, rol, permisos) {
-        const sesion = { username, rol, permisos, timestamp: now() };
+        const sesion = { username, rol, permisos, timestamp: new Date().getTime() };
         localStorage.setItem('sesionActiva', JSON.stringify(sesion));
     },
 

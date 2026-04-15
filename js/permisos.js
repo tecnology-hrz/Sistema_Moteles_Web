@@ -6,7 +6,14 @@
 // Obtener sesión actual
 function obtenerSesionActual() {
     try {
-        return JSON.parse(localStorage.getItem('sesionActiva') || '{}');
+        const datos = JSON.parse(localStorage.getItem('sesionActiva') || '{}');
+        if (!datos.username) return {};
+        const DOS_ANOS_MS = 2 * 365 * 24 * 60 * 60 * 1000;
+        const ahora = new Date().getTime();
+        if (datos.timestamp && (ahora - datos.timestamp) < DOS_ANOS_MS) return datos;
+        // Sesión expirada
+        localStorage.removeItem('sesionActiva');
+        return {};
     } catch (e) { return {}; }
 }
 
