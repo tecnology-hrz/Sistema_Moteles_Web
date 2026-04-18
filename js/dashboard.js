@@ -559,7 +559,7 @@ function _imprimirTurnoHTML(datos, modo) {
     }, 400);
 }
 
-// Cargar registro de turnos — 12AM hoy a 12PM mañana
+// Cargar registro de turnos — últimas 48 horas
 async function cargarRegistroTurnos(sedeId) {
     try {
         if (typeof pywebview !== 'undefined' && pywebview.api) {
@@ -567,13 +567,10 @@ async function cargarRegistroTurnos(sedeId) {
             var tbody = document.getElementById('registroTurnosBody');
             if (!tbody) return;
 
-            // Ventana fija: 12AM (medianoche) de hoy hasta 12PM (mediodía) de mañana
+            // Ventana: últimas 48 horas desde ahora
             var ahora = typeof fechaColombia === 'function' ? fechaColombia() : new Date();
-            var inicio48h = new Date(ahora);
-            inicio48h.setHours(0, 0, 0, 0); // 12AM de hoy
-            var finVentana = new Date(inicio48h);
-            finVentana.setDate(finVentana.getDate() + 1);
-            finVentana.setHours(12, 0, 0, 0); // 12PM de mañana
+            var inicio48h = new Date(ahora.getTime() - 48 * 60 * 60 * 1000);
+            var finVentana = ahora;
 
             // Actualizar etiqueta de fecha
             var labelEl = document.getElementById('registroFechaLabel');
@@ -583,7 +580,7 @@ async function cargarRegistroTurnos(sedeId) {
                            String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear() +
                            ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
                 }
-                labelEl.textContent = fmtCorta(inicio48h) + ' — ' + fmtCorta(finVentana);
+                labelEl.textContent = 'Últimas 48h: ' + fmtCorta(inicio48h) + ' — ' + fmtCorta(ahora);
             }
 
             // Helper para parsear fecha_ingreso (string ISO, ms, o Timestamp Firestore)
@@ -597,11 +594,11 @@ async function cargarRegistroTurnos(sedeId) {
                 return new Date(f);
             }
 
-            // Filtrar ventana 12AM hoy — 12PM mañana
+            // Filtrar últimas 48h
             var registrosDia = (registros || []).filter(function(r) {
                 var fi = parseFecha(r.fecha_ingreso);
                 if (!fi || isNaN(fi.getTime())) return false;
-                return fi >= inicio48h && fi <= finVentana;
+                return fi >= inicio48h && fi <= ahora;
             });
 
             var totalesBar = document.getElementById('registroTotalesBar');
