@@ -605,13 +605,10 @@ async function cargarRegistroTurnos(sedeId) {
             });
 
             var totalesBar = document.getElementById('registroTotalesBar');
-            var totalPorSedeWrap = document.getElementById('totalPorSedeWrap');
 
             if (registrosDia.length > 0) {
                 tbody.innerHTML = '';
                 var totalFacturado = 0;
-                var totalFacturadoSede = 0;
-                var sedeSeleccionada = sedeId || null;
 
                 registrosDia.forEach(function(registro) {
                     var tr = document.createElement('tr');
@@ -631,31 +628,13 @@ async function cargarRegistroTurnos(sedeId) {
                     tbody.appendChild(tr);
 
                     totalFacturado += Number(registro.total_facturado) || 0;
-                    if (sedeSeleccionada && registro.sede_id === sedeSeleccionada) {
-                        totalFacturadoSede += Number(registro.total_facturado) || 0;
-                    }
                 });
 
-                // Fila de total
-                var trTotal = document.createElement('tr');
-                trTotal.className = 'fila-total-dia';
-                trTotal.innerHTML = '<td colspan="5" style="text-align:right;font-weight:700;font-size:13px;background:#f5f5f5;">Total Facturado del Día:</td>' +
-                    '<td style="font-weight:700;font-size:14px;color:#000;background:#f5f5f5;">$'+totalFacturado.toLocaleString('es-CO')+'</td>';
-                tbody.appendChild(trTotal);
-
-                // Barra de totales
+                // Barra de totales — solo Total Facturado
                 if (totalesBar) {
                     totalesBar.style.display = 'flex';
                     var elTotal = document.getElementById('totalFacturadoDia');
                     if (elTotal) elTotal.textContent = '$' + totalFacturado.toLocaleString('es-CO');
-
-                    if (sedeSeleccionada && totalPorSedeWrap) {
-                        totalPorSedeWrap.style.display = 'flex';
-                        var elSede = document.getElementById('totalFacturadoSede');
-                        if (elSede) elSede.textContent = '$' + totalFacturadoSede.toLocaleString('es-CO');
-                    } else if (totalPorSedeWrap) {
-                        totalPorSedeWrap.style.display = 'none';
-                    }
                 }
             } else {
                 tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay turnos registrados hoy</td></tr>';
