@@ -22,13 +22,13 @@
         </div>
         
         <nav class="nav-menu">
-            <a href="dasboard-admin.html" class="nav-item active">
-                <i class="fas fa-chart-line"></i>
-                <span>Turnos</span>
-            </a>
             <a href="habitaciones.html" class="nav-item">
                 <i class="fas fa-door-closed"></i>
                 <span>Habitaciones</span>
+            </a>
+            <a href="dasboard-admin.html" class="nav-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>Turnos</span>
             </a>
             <a href="tarifas.html" class="nav-item">
                 <i class="fas fa-tags"></i>
@@ -175,7 +175,18 @@
                     <div class="registro-turnos-card">
                         <div class="registro-header">
                             <i class="fas fa-history"></i>
-                            <h3>Registro de Turnos</h3>
+                            <h3>Turnos — Últimas 24H</h3>
+                            <span class="registro-fecha-label" id="registroFechaLabel"></span>
+                        </div>
+                        <div class="registro-totales-bar" id="registroTotalesBar" style="display:none;">
+                            <div class="totales-item">
+                                <span class="totales-label">Total Facturado</span>
+                                <span class="totales-value" id="totalFacturadoDia">$0</span>
+                            </div>
+                            <div class="totales-item totales-item-sede" id="totalPorSedeWrap" style="display:none;">
+                                <span class="totales-label">Total Facturado por Sede</span>
+                                <span class="totales-value" id="totalFacturadoSede">$0</span>
+                            </div>
                         </div>
                         <div class="registro-table-container">
                             <table class="registro-table">
@@ -191,7 +202,7 @@
                                 </thead>
                                 <tbody id="registroTurnosBody">
                                     <tr>
-                                        <td colspan="4" class="no-data">No hay registros de turnos</td>
+                                        <td colspan="6" class="no-data">No hay turnos en las últimas 48 horas</td>
                                     </tr>
                                 </tbody>
                             </table>

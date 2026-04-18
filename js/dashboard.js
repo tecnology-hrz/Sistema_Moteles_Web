@@ -559,20 +559,65 @@ function _imprimirTurnoHTML(datos, modo) {
     }, 400);
 }
 
-// Cargar registro de turnos
+// Cargar registro de turnos — 12AM hoy a 12PM mañana
 async function cargarRegistroTurnos(sedeId) {
     try {
         if (typeof pywebview !== 'undefined' && pywebview.api) {
             var registros = await pywebview.api.obtener_registro_turnos(sedeId || null);
             var tbody = document.getElementById('registroTurnosBody');
             if (!tbody) return;
-            if (registros && registros.length > 0) {
+
+            // Ventana fija: 12AM (medianoche) de hoy hasta 12PM (mediodía) de mañana
+            var ahora = typeof fechaColombia === 'function' ? fechaColombia() : new Date();
+            var inicio48h = new Date(ahora);
+            inicio48h.setHours(0, 0, 0, 0); // 12AM de hoy
+            var finVentana = new Date(inicio48h);
+            finVentana.setDate(finVentana.getDate() + 1);
+            finVentana.setHours(12, 0, 0, 0); // 12PM de mañana
+
+            // Actualizar etiqueta de fecha
+            var labelEl = document.getElementById('registroFechaLabel');
+            if (labelEl) {
+                function fmtCorta(d) {
+                    return String(d.getDate()).padStart(2,'0') + '/' +
+                           String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear() +
+                           ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+                }
+                labelEl.textContent = fmtCorta(inicio48h) + ' — ' + fmtCorta(finVentana);
+            }
+
+            // Helper para parsear fecha_ingreso (string ISO, ms, o Timestamp Firestore)
+            function parseFecha(f) {
+                if (!f) return null;
+                if (typeof f === 'object' && f !== null) {
+                    if (typeof f.toDate === 'function') return f.toDate();
+                    if (f.seconds) return new Date(f.seconds * 1000);
+                    return new Date(f);
+                }
+                return new Date(f);
+            }
+
+            // Filtrar ventana 12AM hoy — 12PM mañana
+            var registrosDia = (registros || []).filter(function(r) {
+                var fi = parseFecha(r.fecha_ingreso);
+                if (!fi || isNaN(fi.getTime())) return false;
+                return fi >= inicio48h && fi <= finVentana;
+            });
+
+            var totalesBar = document.getElementById('registroTotalesBar');
+            var totalPorSedeWrap = document.getElementById('totalPorSedeWrap');
+
+            if (registrosDia.length > 0) {
                 tbody.innerHTML = '';
-                registros.forEach(function(registro) {
+                var totalFacturado = 0;
+                var totalFacturadoSede = 0;
+                var sedeSeleccionada = sedeId || null;
+
+                registrosDia.forEach(function(registro) {
                     var tr = document.createElement('tr');
                     function fmtFechaReg(fechaISO) {
-                        if (!fechaISO) return '-';
-                        var fecha = typeof fechaColombia === 'function' ? fechaColombia(fechaISO) : new Date(fechaISO);
+                        var fecha = parseFecha(fechaISO);
+                        if (!fecha || isNaN(fecha.getTime())) return '-';
                         var dia = String(fecha.getDate()).padStart(2,'0'), mes = String(fecha.getMonth()+1).padStart(2,'0'), anio = fecha.getFullYear();
                         var horas = fecha.getHours(), minutos = String(fecha.getMinutes()).padStart(2,'0');
                         var ampm = horas >= 12 ? 'PM' : 'AM';
@@ -584,9 +629,37 @@ async function cargarRegistroTurnos(sedeId) {
                     var tc = registro.total_caja !== undefined ? '$'+registro.total_caja.toLocaleString('es-CO') : '$0';
                     tr.innerHTML = '<td>'+registro.usuario+'</td><td>'+fmtFechaReg(registro.fecha_ingreso)+'</td><td>'+fmtFechaReg(registro.fecha_salida)+'</td><td>'+db+'</td><td>'+tc+'</td><td style="font-weight:700">'+tf+'</td>';
                     tbody.appendChild(tr);
+
+                    totalFacturado += Number(registro.total_facturado) || 0;
+                    if (sedeSeleccionada && registro.sede_id === sedeSeleccionada) {
+                        totalFacturadoSede += Number(registro.total_facturado) || 0;
+                    }
                 });
+
+                // Fila de total
+                var trTotal = document.createElement('tr');
+                trTotal.className = 'fila-total-dia';
+                trTotal.innerHTML = '<td colspan="5" style="text-align:right;font-weight:700;font-size:13px;background:#f5f5f5;">Total Facturado del Día:</td>' +
+                    '<td style="font-weight:700;font-size:14px;color:#000;background:#f5f5f5;">$'+totalFacturado.toLocaleString('es-CO')+'</td>';
+                tbody.appendChild(trTotal);
+
+                // Barra de totales
+                if (totalesBar) {
+                    totalesBar.style.display = 'flex';
+                    var elTotal = document.getElementById('totalFacturadoDia');
+                    if (elTotal) elTotal.textContent = '$' + totalFacturado.toLocaleString('es-CO');
+
+                    if (sedeSeleccionada && totalPorSedeWrap) {
+                        totalPorSedeWrap.style.display = 'flex';
+                        var elSede = document.getElementById('totalFacturadoSede');
+                        if (elSede) elSede.textContent = '$' + totalFacturadoSede.toLocaleString('es-CO');
+                    } else if (totalPorSedeWrap) {
+                        totalPorSedeWrap.style.display = 'none';
+                    }
+                }
             } else {
-                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay registros de turnos</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay turnos registrados hoy</td></tr>';
+                if (totalesBar) totalesBar.style.display = 'none';
             }
         }
     } catch (error) {

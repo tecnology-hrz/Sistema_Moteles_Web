@@ -86,7 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const DOS_ANOS_MS = 2 * 365 * 24 * 60 * 60 * 1000;
         const ahora = new Date().getTime();
         if (datos.timestamp && (ahora - datos.timestamp) < DOS_ANOS_MS) {
-            window.location.href = 'dasboard-admin.html';
+            window.location.href = 'habitaciones.html';
         } else {
             // Sesión expirada, limpiar
             localStorage.removeItem('sesionActiva');
@@ -129,7 +129,7 @@ loginForm.addEventListener('submit', async (e) => {
             
             // Todos van al mismo dashboard
             setTimeout(() => {
-                window.location.href = 'dasboard-admin.html';
+                window.location.href = 'habitaciones.html';
             }, 1000);
         } else {
             mostrarMensaje(resultado.message, 'error');

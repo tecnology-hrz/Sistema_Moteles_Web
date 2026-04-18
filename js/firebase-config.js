@@ -1223,7 +1223,11 @@ const api = {
             const snap = await getDocs(collection(db, 'turnos'));
             let turnos = serializarDocs(snap);
             if (sede_id) turnos = turnos.filter(t => t.sede_id === sede_id);
-            turnos.sort((a, b) => (b.fecha_ingreso || '').localeCompare(a.fecha_ingreso || ''));
+            turnos.sort((a, b) => {
+                const fa = a.fecha_ingreso ? String(a.fecha_ingreso) : '';
+                const fb = b.fecha_ingreso ? String(b.fecha_ingreso) : '';
+                return fb.localeCompare(fa);
+            });
             turnos = turnos.slice(0, 50);
 
             // Leer dinero base de config
