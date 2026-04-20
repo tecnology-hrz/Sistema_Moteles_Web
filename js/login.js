@@ -7,6 +7,12 @@ const messageRegistroDiv = document.getElementById('messageRegistro');
 const passwordInput = document.getElementById('regPassword');
 const passwordStrengthBar = document.getElementById('passwordStrengthBar');
 
+// Auto-rellenar credenciales al cargar
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('username').value = 'GUSTAVO';
+    document.getElementById('password').value = '123456789';
+});
+
 // Prevenir espacios en campos de usuario
 document.getElementById('username').addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/\s/g, '');
