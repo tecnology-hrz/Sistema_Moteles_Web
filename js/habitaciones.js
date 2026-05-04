@@ -24,6 +24,12 @@ function formatearPrecioTarjeta(numero) {
     return '$' + n.toLocaleString('es-CO');
 }
 
+/** Precio para mostrar en tarjetas ocupadas (sin símbolo $) */
+function formatearPrecioSinSimbolo(numero) {
+    const n = parseInt(numero, 10) || 0;
+    return n.toLocaleString('es-CO');
+}
+
 // Esperar a que pywebview esté listo
 function esperarPywebview() {
     return new Promise((resolve) => {
@@ -267,6 +273,44 @@ function calcularTiempoLimpieza(fechaLimpieza, posicionCola = 0, sedeId = null) 
     };
 }
 
+// Calcular tiempo transcurrido de ocupación
+function calcularTiempoOcupacion(fechaIngreso) {
+    if (!fechaIngreso) return { texto: '0h 0m', totalHoras: 0 };
+    
+    const ahora = typeof fechaColombia === 'function' ? fechaColombia() : new Date();
+    const ingreso = typeof fechaColombia === 'function' ? fechaColombia(fechaIngreso) : new Date(fechaIngreso);
+    const diff = ahora - ingreso;
+    
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    let texto = '';
+    if (dias > 0) {
+        texto = `${dias}d ${horas}h`;
+    } else if (horas > 0) {
+        texto = `${horas}h ${minutos}m`;
+    } else {
+        texto = `${minutos}m`;
+    }
+    
+    return {
+        dias,
+        horas: horas + (dias * 24),
+        minutos,
+        texto: texto.trim(),
+        totalHoras: dias * 24 + horas + (minutos / 60)
+    };
+}
+
+// Calcular total de consumos de una habitación
+function calcularTotalConsumos(habitacion) {
+    if (!habitacion || !habitacion.consumos_ocupacion || !habitacion.consumos_ocupacion.length) {
+        return 0;
+    }
+    return habitacion.consumos_ocupacion.reduce((suma, c) => suma + (Number(c.subtotal) || 0), 0);
+}
+
 // Actualizar contadores de limpieza en tiempo real
 function actualizarContadoresLimpieza() {
     const habitacionesEnLimpieza = document.querySelectorAll('.habitacion-campo-estado--limpieza');
@@ -291,6 +335,71 @@ function actualizarContadoresLimpieza() {
                     } else {
                         cargarTodasHabitaciones();
                     }
+                }
+            }
+        }
+    });
+}
+
+// Actualizar contadores de ocupación en tiempo real
+function actualizarContadoresOcupacion() {
+    const habitacionesOcupadas = document.querySelectorAll('.habitacion-campo-estado-ocupada-container');
+
+    habitacionesOcupadas.forEach(elemento => {
+        const habitacionId = elemento.getAttribute('data-habitacion-id');
+        const fechaIngreso = elemento.getAttribute('data-fecha-ingreso');
+
+        if (fechaIngreso) {
+            const tiempoOcupacion = calcularTiempoOcupacion(fechaIngreso);
+            const elementoTiempo = document.getElementById(`tiempo-ocupacion-${habitacionId}`);
+            const elementoTotal = elemento.querySelector('.ocupacion-total');
+            
+            if (elementoTiempo) {
+                // Encontrar la habitación para obtener datos de precios
+                const habitacion = habitaciones.find(h => h._id === habitacionId);
+                if (!habitacion) return;
+                
+                const horasBase = habitacion.horas_base || 4;
+                const precioBase = habitacion.precio_horas || habitacion.precio_base || habitacion.precio || 0;
+                const precioHoraExtra = habitacion.precio_hora_extra || 0;
+                
+                // Calcular valor de la habitación según tiempo transcurrido
+                let valorHabitacion = 0;
+                if (tiempoOcupacion.totalHoras <= horasBase) {
+                    valorHabitacion = precioBase;
+                } else {
+                    const horasExtras = Math.ceil(tiempoOcupacion.totalHoras - horasBase);
+                    valorHabitacion = precioBase + (horasExtras * precioHoraExtra);
+                }
+                
+                // Calcular total de consumos
+                const totalConsumos = calcularTotalConsumos(habitacion);
+                const totalGeneral = valorHabitacion + totalConsumos;
+                
+                // Determinar color según tiempo transcurrido
+                let colorTiempo = '#10b981'; // Verde
+                if (tiempoOcupacion.totalHoras > horasBase * 1.5) {
+                    colorTiempo = '#ef4444'; // Rojo
+                } else if (tiempoOcupacion.totalHoras > horasBase) {
+                    colorTiempo = '#f59e0b'; // Amarillo
+                }
+                
+                // Actualizar tiempo
+                elementoTiempo.textContent = tiempoOcupacion.texto;
+                elementoTiempo.style.color = '#000';
+                elementoTiempo.style.fontWeight = '700';
+                
+                // Actualizar total
+                if (elementoTotal) {
+                    elementoTotal.textContent = formatearPrecioSinSimbolo(totalGeneral);
+                    elementoTotal.style.color = '#000';
+                    elementoTotal.style.fontWeight = '700';
+                }
+                
+                // Actualizar también el icono del reloj
+                const iconoReloj = elementoTiempo.parentElement.querySelector('.fa-clock');
+                if (iconoReloj) {
+                    iconoReloj.style.color = '#000';
                 }
             }
         }
@@ -374,36 +483,58 @@ function renderizarHabitaciones() {
         }[h.estado] || 'fa-check-circle';
 
         let campoEstadoHTML = '';
-        if (h.estado === 'ocupada' && h.placa) {
-            // Determinar icono según tipo de vehículo
-            let iconoVehiculo = 'fa-car';
-            let textoVehiculo = h.placa;
-            let mostrarColor = true;
-            let colorVehiculo = h.color_vehiculo || h.color || '#CCCCCC';
-
-            if (h.tipo_vehiculo === 'moto') {
-                iconoVehiculo = 'fa-motorcycle';
-            } else if (h.tipo_vehiculo === 'taxi') {
-                iconoVehiculo = 'fa-taxi';
-                textoVehiculo = 'Taxi';
-                colorVehiculo = '#FFD700'; // Amarillo para taxi
-            } else if (h.tipo_vehiculo === 'otro') {
-                iconoVehiculo = 'fa-question';
-                textoVehiculo = 'Otro';
-                mostrarColor = false;
+        if (h.estado === 'ocupada') {
+            // Calcular tiempo de ocupación y consumos
+            const tiempoOcupacion = calcularTiempoOcupacion(h.fecha_ingreso);
+            const totalConsumos = calcularTotalConsumos(h);
+            
+            // Calcular valor de la habitación según tiempo transcurrido
+            let valorHabitacion = 0;
+            const horasBase = h.horas_base || 4;
+            const precioBase = h.precio_horas || h.precio_base || h.precio || 0;
+            const precioHoraExtra = h.precio_hora_extra || 0;
+            
+            if (tiempoOcupacion.totalHoras <= horasBase) {
+                valorHabitacion = precioBase;
+            } else {
+                const horasExtras = Math.ceil(tiempoOcupacion.totalHoras - horasBase);
+                valorHabitacion = precioBase + (horasExtras * precioHoraExtra);
             }
-
+            
+            // Total general (habitación + consumos)
+            const totalGeneral = valorHabitacion + totalConsumos;
+            
+            // Determinar icono según tipo de vehículo
+            let iconoVehiculo = 'fa-car'; // Por defecto carro
+            const tipoVehiculo = (h.tipo_vehiculo || '').toLowerCase();
+            if (tipoVehiculo === 'moto') iconoVehiculo = 'fa-motorcycle';
+            else if (tipoVehiculo === 'taxi') iconoVehiculo = 'fa-taxi';
+            else if (tipoVehiculo === 'otro') iconoVehiculo = 'fa-question';
+            
+            // Determinar color según tiempo transcurrido
+            let colorTiempo = '#10b981'; // Verde por defecto
+            
+            if (tiempoOcupacion.totalHoras > horasBase * 1.5) {
+                colorTiempo = '#ef4444'; // Rojo si excede 150% del tiempo base
+            } else if (tiempoOcupacion.totalHoras > horasBase) {
+                colorTiempo = '#f59e0b'; // Amarillo si excede el tiempo base
+            }
+            
             campoEstadoHTML = `
-            <div class="habitacion-campo-estado habitacion-campo-estado--ocupada">
-                <i class="fas ${iconoVehiculo}"></i>
-                <span>${textoVehiculo}</span>
-                ${mostrarColor ? `<div class="vehiculo-color-circle" style="background: ${colorVehiculo};" title="${h.color || colorVehiculo}"></div>` : ''}
-            </div>`;
-        } else if (h.estado === 'ocupada') {
-            campoEstadoHTML = `
-            <div class="habitacion-campo-estado habitacion-campo-estado--ocupada">
-                <i class="fas fa-car"></i>
-                <span>Sin placa registrada</span>
+            <div class="habitacion-campo-estado-ocupada-container" data-habitacion-id="${h._id}" data-fecha-ingreso="${h.fecha_ingreso || ''}">
+                <div class="habitacion-campo-estado habitacion-campo-estado--ocupada">
+                    <i class="fas ${iconoVehiculo}" style="color: #000;"></i>
+                    <span style="color: #000; font-weight: 700;">${h.placa_vehiculo || h.placa || 'ABC123'}</span>
+                    <div class="vehiculo-color-circle" style="background-color: ${h.color_vehiculo || h.color || '#ff0000'};"></div>
+                </div>
+                <div class="habitacion-campo-estado habitacion-campo-estado--tiempo">
+                    <i class="fas fa-clock" style="color: #000;"></i>
+                    <span class="ocupacion-tiempo" id="tiempo-ocupacion-${h._id}" style="color: #000; font-weight: 700;">${tiempoOcupacion.texto}</span>
+                </div>
+                <div class="habitacion-campo-estado habitacion-campo-estado--total">
+                    <i class="fas fa-dollar-sign" style="color: #000;"></i>
+                    <span class="ocupacion-total" style="color: #000; font-weight: 700;">${formatearPrecioSinSimbolo(totalGeneral)}</span>
+                </div>
             </div>`;
         } else if (h.estado === 'disponible') {
             campoEstadoHTML = `
@@ -497,17 +628,17 @@ function renderizarHabitaciones() {
                             ${mostrarChipSede ? `<span class="habitacion-sede-chip">${textoSedeCompleto}</span>` : ''}
                         </div>
                         <div class="habitacion-fila-meta">
-                            <div class="habitacion-capacidad">
+                            ${h.estado !== 'ocupada' ? `<div class="habitacion-capacidad">
                                 <i class="fas fa-user-friends"></i>
                                 <span>${h.capacidad}</span>
-                            </div>
-                            <div class="habitacion-precio">
+                            </div>` : ''}
+                            ${h.estado !== 'ocupada' ? `<div class="habitacion-precio">
                                 <div style="font-weight: 600; margin-bottom: 4px;">${formatearPrecioTarjeta(h.precio_horas || h.precio_base || h.precio || 0)} x ${h.horas_base || 4}h</div>
                                 <div style="font-size: 11px; color: #666; line-height: 1.4;">
                                     <div><strong>Noche (12h):</strong> ${formatearPrecioTarjeta(h.precio_noche || 0)}</div>
                                     <div><strong>Día (24h):</strong> ${formatearPrecioTarjeta(h.precio_dia || 0)}</div>
                                 </div>
-                            </div>
+                            </div>` : ''}
                         </div>
                         ${campoEstadoHTML}
                     </div>
@@ -521,10 +652,15 @@ function renderizarHabitaciones() {
         `;
     }).join('');
 
-    // Iniciar actualización de contadores cada segundo si hay habitaciones en limpieza
+    // Iniciar actualización de contadores cada segundo si hay habitaciones en limpieza u ocupadas
     const hayHabitacionesEnLimpieza = habitacionesFiltradas.some(h => h.estado === 'limpieza');
-    if (hayHabitacionesEnLimpieza) {
-        intervaloActualizacion = setInterval(actualizarContadoresLimpieza, 1000);
+    const hayHabitacionesOcupadas = habitacionesFiltradas.some(h => h.estado === 'ocupada');
+    
+    if (hayHabitacionesEnLimpieza || hayHabitacionesOcupadas) {
+        intervaloActualizacion = setInterval(() => {
+            if (hayHabitacionesEnLimpieza) actualizarContadoresLimpieza();
+            if (hayHabitacionesOcupadas) actualizarContadoresOcupacion();
+        }, 1000);
     }
 }
 

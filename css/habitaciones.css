@@ -638,8 +638,8 @@
 
 .habitacion-campo-estado--ocupada span {
     font-size: 11px;
-    font-weight: 600;
-    color: #171717;
+    font-weight: 700;
+    color: #000;
     flex: 1;
 }
 
@@ -650,6 +650,85 @@
     border: 2px solid #ddd;
     flex-shrink: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Información de ocupación: 3 cajas separadas como en la imagen */
+.habitacion-campo-estado-ocupada-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.habitacion-campo-estado--tiempo,
+.habitacion-campo-estado--total {
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.habitacion-campo-estado--tiempo i {
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.habitacion-campo-estado--total i {
+    font-size: 12px;
+    flex-shrink: 0;
+    color: #059669;
+}
+
+.ocupacion-tiempo {
+    font-size: 12px;
+    font-weight: 700;
+    flex: 1;
+    color: #000;
+    letter-spacing: 0.5px;
+}
+
+.ocupacion-total {
+    font-size: 11px;
+    font-weight: 700;
+    color: #000;
+    flex: 1;
+}
+
+/* Información de ocupación: tiempo y consumos */
+.habitacion-campo-estado--ocupada-info {
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ocupacion-info-fila {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ocupacion-info-fila i {
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.ocupacion-info-fila .fa-shopping-cart {
+    color: #6366f1;
+}
+
+.ocupacion-consumos {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6366f1;
+    flex: 1;
 }
 
 .habitacion-campo-estado--muted i {
@@ -992,6 +1071,34 @@
     .habitacion-campo-estado--ocupada i,
     .habitacion-campo-estado--muted i {
         font-size: 9px;
+    }
+
+    /* Estilos responsive para info de ocupación */
+    .habitacion-campo-estado-ocupada-container {
+        gap: 4px;
+    }
+
+    .habitacion-campo-estado--tiempo,
+    .habitacion-campo-estado--total {
+        padding: 3px 5px;
+        gap: 4px;
+        border-radius: 6px;
+    }
+
+    .habitacion-campo-estado--tiempo i,
+    .habitacion-campo-estado--total i {
+        font-size: 9px;
+    }
+
+    .ocupacion-info-fila i {
+        font-size: 9px;
+    }
+
+    .ocupacion-tiempo,
+    .ocupacion-consumos,
+    .ocupacion-total {
+        font-size: 9px;
+        letter-spacing: 0.3px;
     }
 
     .habitacion-campo-estado--limpieza .limpieza-valor {
@@ -1489,6 +1596,21 @@
     .habitacion-campo-estado--ocupada i,
     .habitacion-campo-estado--muted i {
         font-size: 8px;
+    }
+
+    /* Estilos responsive para info de ocupación en móviles pequeños */
+    .ocupacion-info-fila i {
+        font-size: 8px;
+    }
+
+    .ocupacion-tiempo,
+    .ocupacion-consumos {
+        font-size: 7px;
+    }
+
+    .habitacion-campo-estado--ocupada-info {
+        padding: 3px 4px;
+        gap: 4px;
     }
 
     .habitacion-campo-estado--limpieza .limpieza-valor {
