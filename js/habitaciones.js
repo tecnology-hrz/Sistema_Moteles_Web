@@ -511,6 +511,22 @@ function renderizarHabitaciones() {
             else if (tipoVehiculo === 'taxi') iconoVehiculo = 'fa-taxi';
             else if (tipoVehiculo === 'otro') iconoVehiculo = 'fa-question';
             
+            // Determinar texto y color según tipo de vehículo
+            let textoVehiculo = h.placa_vehiculo || h.placa || 'ABC123';
+            let colorVehiculo = h.color_vehiculo || h.color || '#ff0000';
+            
+            // Si es taxi u otro sin placa, mostrar el tipo en lugar de N/A
+            if (tipoVehiculo === 'taxi' && (!textoVehiculo || textoVehiculo === 'N/A')) {
+                textoVehiculo = 'TAXI';
+                colorVehiculo = '#FFD700'; // Amarillo para taxi
+            } else if (tipoVehiculo === 'otro' && (!textoVehiculo || textoVehiculo === 'N/A')) {
+                textoVehiculo = 'OTRO';
+                colorVehiculo = '#808080'; // Gris para otro
+            } else if (textoVehiculo === 'N/A') {
+                textoVehiculo = 'SIN PLACA';
+                colorVehiculo = '#808080'; // Gris para sin placa
+            }
+            
             // Determinar color según tiempo transcurrido
             let colorTiempo = '#10b981'; // Verde por defecto
             
@@ -524,8 +540,8 @@ function renderizarHabitaciones() {
             <div class="habitacion-campo-estado-ocupada-container" data-habitacion-id="${h._id}" data-fecha-ingreso="${h.fecha_ingreso || ''}">
                 <div class="habitacion-campo-estado habitacion-campo-estado--ocupada">
                     <i class="fas ${iconoVehiculo}" style="color: #000;"></i>
-                    <span style="color: #000; font-weight: 700;">${h.placa_vehiculo || h.placa || 'ABC123'}</span>
-                    <div class="vehiculo-color-circle" style="background-color: ${h.color_vehiculo || h.color || '#ff0000'};"></div>
+                    <span style="color: #000; font-weight: 700;">${textoVehiculo}</span>
+                    <div class="vehiculo-color-circle" style="background-color: ${colorVehiculo};"></div>
                 </div>
                 <div class="habitacion-campo-estado habitacion-campo-estado--tiempo">
                     <i class="fas fa-clock" style="color: #000;"></i>
